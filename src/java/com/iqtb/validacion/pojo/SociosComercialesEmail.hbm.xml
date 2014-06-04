@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.iqtb.validacion.pojo.SociosComercialesEmail" table="SOCIOS_COMERCIALES_EMAIL" catalog="iqtb">
+        <id name="idSocioComercial" type="int">
+            <column name="idSOCIO_COMERCIAL" />
+            <generator class="assigned" />
+        </id>
+        <property name="email" type="string">
+            <column name="EMAIL" />
+        </property>
+        <property name="asunto" type="string">
+            <column name="ASUNTO" />
+        </property>
+        <property name="mensaje" type="string">
+            <column name="MENSAJE" />
+        </property>
+    </class>
+</hibernate-mapping>

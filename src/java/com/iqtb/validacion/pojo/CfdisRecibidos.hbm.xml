@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.iqtb.validacion.pojo.CfdisRecibidos" table="CFDIS_RECIBIDOS" catalog="iqtb">
+        <composite-id name="id" class="com.iqtb.validacion.pojo.CfdisRecibidosId">
+            <key-property name="idCfdiRecibido" type="int">
+                <column name="idCFDI_RECIBIDO" />
+            </key-property>
+            <key-property name="idSocioComercial" type="int">
+                <column name="idSOCIO_COMERCIAL" />
+            </key-property>
+            <key-property name="idEmpresa" type="int">
+                <column name="idEMPRESA" />
+            </key-property>
+        </composite-id>
+        <property name="serie" type="string">
+            <column name="SERIE" length="45" />
+        </property>
+        <property name="folio" type="java.lang.Integer">
+            <column name="FOLIO" />
+        </property>
+        <property name="uuid" type="string">
+            <column name="UUID" length="36" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="19" not-null="true" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="TOTAL" precision="16" scale="6" not-null="true" />
+        </property>
+        <property name="xmlSat" type="string">
+            <column name="XML_SAT" not-null="true" />
+        </property>
+        <property name="fechaRecepcion" type="timestamp">
+            <column name="FECHA_RECEPCION" length="19" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="20" not-null="true" />
+        </property>
+        <property name="error" type="string">
+            <column name="ERROR" length="65535" />
+        </property>
+        <property name="reportado" type="java.lang.Byte">
+            <column name="REPORTADO" />
+        </property>
+    </class>
+</hibernate-mapping>

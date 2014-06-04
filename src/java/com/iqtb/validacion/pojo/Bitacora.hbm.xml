@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.iqtb.validacion.pojo.Bitacora" table="BITACORA" catalog="iqtb">
+        <composite-id name="id" class="com.iqtb.validacion.pojo.BitacoraId">
+            <key-property name="idBitacora" type="int">
+                <column name="idBITACORA" />
+            </key-property>
+            <key-property name="idUsuario" type="int">
+                <column name="idUSUARIO" />
+            </key-property>
+            <key-property name="idServicio" type="int">
+                <column name="idSERVICIO" />
+            </key-property>
+            <key-property name="idEmpresa" type="int">
+                <column name="idEMPRESA" />
+            </key-property>
+        </composite-id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="19" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="TIPO" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

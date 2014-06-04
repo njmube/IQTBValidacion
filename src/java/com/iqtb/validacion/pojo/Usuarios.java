@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 03-jun-2014 18:54:48 by Hibernate Tools 3.6.0
+// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;

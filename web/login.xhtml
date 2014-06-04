@@ -27,7 +27,7 @@
                 <p><h:inputSecret pt:placeholder="Contraseña" value="#{mbAcceso.pass}" /></p>
                 <!--<h:messages infoStyle="color: blue;list-style:none;" errorStyle="color:red;list-style:none;" warnStyle="color:orange;list-style:none"/>-->
                 <section class="seccionBotones">
-                    <p:commandButton id="btn" value="Ingresar" action="#{mbAcceso.logeo()}" styleClass="btnLogin" update="frmLogin"/>
+                    <p:commandButton id="btn" value="Ingresar" action="#{mbAcceso.login()}" styleClass="btnLogin" update="frmLogin"/>
                 <!-- oncomplete="mostrarDialogEmpresas(xhr, status, args)" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario"-->
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
