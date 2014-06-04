@@ -23,15 +23,8 @@ import org.hibernate.Transaction;
 public class DaoUsuarioEmpresa implements InterfaceUsuarioEmpresa{
     private Session session;
     private Transaction tx;
-
     
-    
-    public void matodo(){
-        System.out.println("metodo string");
-    }
-    
-    
-//    @Override
+    @Override
     public List<UsuariosHasEmpresasId> getEmpresasByIdUsuario(Integer idUsuario) {
         List<UsuariosHasEmpresasId> uei = null;
         
@@ -57,16 +50,11 @@ public class DaoUsuarioEmpresa implements InterfaceUsuarioEmpresa{
             throw he;
         }finally{
             tx.commit();
-            session.close();
+            if (session.isOpen()) {
+                session.close();
+            }
         }
         return listaUsuariosEmpresas;
     }
-//    public static void main(String[] args) {
-//        new DaoUsuarioEmpresa().matodo();
-//        List<UsuariosHasEmpresasId> list = new DaoUsuarioEmpresa().getEmpresasByIdUsuario(1);
-//        for (UsuariosHasEmpresasId EmpresasId : list) {
-//            System.out.println("idEmpresa: " +EmpresasId.getIdUsuario());
-//        }
-//    }
     
 }
