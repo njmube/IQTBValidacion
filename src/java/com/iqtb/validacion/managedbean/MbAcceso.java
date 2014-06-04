@@ -7,8 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author danielromero
@@ -17,34 +15,13 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class MbAcceso {
 
-    private String user;
+ private String user;
     private String pass;
-    private FacesMessage message;
-    
+    private Usuarios usuario;
+    private FacesMessage msg;
+
     public MbAcceso() {
-    }
-    public String login(){
-        try {
-            DaoUsuario daoUsuario = new DaoUsuario();
-            Usuarios usuario = daoUsuario.getByUserid(this.user);
-            if (usuario != null) {
-                if (usuario.getPasskey().equals(Encrypt.getSHA512(this.pass+usuario.getSalt()))) {
-                    this.message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "Ha iniciado sessión");
-                    FacesContext.getCurrentInstance().addMessage(null, this.message);
-//                    HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-//                    httpSession.setAttribute("correoElectronico", this.user);
-                    return "/principal?faces-redirect=true";
-                }
-            }
-            this.message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrecta");
-            FacesContext.getCurrentInstance().addMessage(null, this.message);
-            return "/login";
-            
-        } catch (Exception e) {
-            
-            return null;
-        }
-        
+        this.usuario = new Usuarios();
     }
 
     public String getUser() {
@@ -62,6 +39,29 @@ public class MbAcceso {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+
+    public String login() {
+        try {
+            
+            this.usuario = new DaoUsuario().getByUserid(this.user);
+            if (this.usuario.getPasskey().equals(Encrypt.getSHA512(this.pass + this.usuario.getSalt()))) {
+                return "/principal?faces-redirect=true";
+            } else {
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrectos");
+            }
+        } catch (Exception ex) {
+            this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrectos");
+        }
+        FacesContext.getCurrentInstance().addMessage(null, this.msg);
+
+        return "/login";
+    }
 }
