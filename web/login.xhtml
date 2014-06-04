@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Acceso</title>
+        <link rel="stylesheet" href="/IQTBValidacion/resources/css/cssLogin.css"/>
+        <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
+    </h:head>
+    <h:body>
+        <p:growl showDetail="true" life="4000" autoUpdate="true"/>
+
+        <section class="contenedorLogin">
+            <h:form id="frmLogin" class="formulario">  
+                <h:panelGrid columns="2" cellpadding="1" cellspacing="5">
+                    <p:panel style="border-style: hidden; background: border-box " >
+                        <p:graphicImage value="/resources/images/iqtb.png" width="80px"/>  
+                    </p:panel>        
+                    <h2>IQTB Validación</h2>
+                </h:panelGrid>
+                <!--<h1>Acceso de Usuario</h1>-->
+                <p></p>
+                <p><h:inputText pt:placeholder="Usuario" value="#{mbAcceso.user}" /></p>
+                <p><h:inputSecret pt:placeholder="Contraseña" value="#{mbAcceso.pass}" /></p>
+                <!--<h:messages infoStyle="color: blue;list-style:none;" errorStyle="color:red;list-style:none;" warnStyle="color:orange;list-style:none"/>-->
+                <section class="seccionBotones">
+                    <p:commandButton id="btn" value="Ingresar" action="#{mbAcceso.logeo()}" styleClass="btnLogin" update="frmLogin"/>
+                <!-- oncomplete="mostrarDialogEmpresas(xhr, status, args)" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario"-->
+                </section>
+                <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
+            </h:form>
+        </section>
+
+<!--        <h:form id="formSeleccionEmpresas">
+            <p:panel style="visibility: hidden">
+                <p:dialog header="Seleccion de Empresa" widgetVar="dialogSeleccionEmpresa" resizable="false" modal="true" closable="false">
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <h:outputText value="Usuario"/><p:inputText id="itUsuario" value="{mbUsuario.usuario.userId}" readonly="true" style="width: 220px"/>
+                        <p:outputLabel/><p:selectOneMenu id="somEmpresas" value="{mbUsuario.empresaSeleccionada}" label="Empresas" var="emp" style="width: 250px"> 
+                            <f:selectItem itemLabel="Seleccione una empresa" itemValue="vacio" id="clienteVacio"/>  
+                            <f:selectItems value="{mbUsuario.listaEmpresas}"/>  
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <center>
+                        <p:commandButton value="Enviar" style="height: 35px" action="{mbUsuario.existeSeleccionEmpresa()}" oncomplete="existeSeleccionEmpresa(xhr, status, args)"/>
+                    </center>
+                </p:dialog>
+            </p:panel>
+        </h:form> -->
+    </h:body>
+</html>
+
