@@ -3,6 +3,7 @@ package com.iqtb.validacion.managedbean;
 import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.encrypt.Encrypt;
 import com.iqtb.validacion.pojo.Usuarios;
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +14,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class MbAcceso {
+public class MbAcceso implements Serializable{
 
  private String user;
     private String pass;
@@ -63,5 +64,13 @@ public class MbAcceso {
         FacesContext.getCurrentInstance().addMessage(null, this.msg);
 
         return "/login";
+    }
+    
+    public String logout(){
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Session cerrada correctamente", null);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return "/login?faces-redirect=true";
     }
 }
