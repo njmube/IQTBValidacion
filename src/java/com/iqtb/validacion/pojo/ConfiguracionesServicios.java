@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 
@@ -9,7 +9,8 @@ package com.iqtb.validacion.pojo;
 public class ConfiguracionesServicios  implements java.io.Serializable {
 
 
-     private ConfiguracionesServiciosId id;
+     private Integer idConfiguracionServicio;
+     private int idServicio;
      private String propiedad;
      private String valor;
      private String descripcion;
@@ -18,20 +19,27 @@ public class ConfiguracionesServicios  implements java.io.Serializable {
     public ConfiguracionesServicios() {
     }
 
-    public ConfiguracionesServicios(ConfiguracionesServiciosId id, String propiedad, String valor, String descripcion, String tipo) {
-       this.id = id;
+    public ConfiguracionesServicios(int idServicio, String propiedad, String valor, String descripcion, String tipo) {
+       this.idServicio = idServicio;
        this.propiedad = propiedad;
        this.valor = valor;
        this.descripcion = descripcion;
        this.tipo = tipo;
     }
    
-    public ConfiguracionesServiciosId getId() {
-        return this.id;
+    public Integer getIdConfiguracionServicio() {
+        return this.idConfiguracionServicio;
     }
     
-    public void setId(ConfiguracionesServiciosId id) {
-        this.id = id;
+    public void setIdConfiguracionServicio(Integer idConfiguracionServicio) {
+        this.idConfiguracionServicio = idConfiguracionServicio;
+    }
+    public int getIdServicio() {
+        return this.idServicio;
+    }
+    
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
     }
     public String getPropiedad() {
         return this.propiedad;

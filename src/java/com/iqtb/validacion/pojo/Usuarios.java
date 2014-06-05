@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,8 @@ import java.util.Date;
 public class Usuarios  implements java.io.Serializable {
 
 
-     private UsuariosId id;
+     private Integer idUsuario;
+     private int idRol;
      private String email;
      private String nombre;
      private String apaterno;
@@ -28,8 +29,8 @@ public class Usuarios  implements java.io.Serializable {
     }
 
 	
-    public Usuarios(UsuariosId id, String email, String nombre, String apaterno, String passkey, String salt, Date dateExpirationPass, Date lastAction, String estado, String userid, Date fechaAlta, int intentosFallidos) {
-        this.id = id;
+    public Usuarios(int idRol, String email, String nombre, String apaterno, String passkey, String salt, Date dateExpirationPass, Date lastAction, String estado, String userid, Date fechaAlta, int intentosFallidos) {
+        this.idRol = idRol;
         this.email = email;
         this.nombre = nombre;
         this.apaterno = apaterno;
@@ -42,8 +43,8 @@ public class Usuarios  implements java.io.Serializable {
         this.fechaAlta = fechaAlta;
         this.intentosFallidos = intentosFallidos;
     }
-    public Usuarios(UsuariosId id, String email, String nombre, String apaterno, String amaterno, String passkey, String salt, Date dateExpirationPass, Date lastAction, String estado, String userid, Date fechaAlta, int intentosFallidos) {
-       this.id = id;
+    public Usuarios(int idRol, String email, String nombre, String apaterno, String amaterno, String passkey, String salt, Date dateExpirationPass, Date lastAction, String estado, String userid, Date fechaAlta, int intentosFallidos) {
+       this.idRol = idRol;
        this.email = email;
        this.nombre = nombre;
        this.apaterno = apaterno;
@@ -58,12 +59,19 @@ public class Usuarios  implements java.io.Serializable {
        this.intentosFallidos = intentosFallidos;
     }
    
-    public UsuariosId getId() {
-        return this.id;
+    public Integer getIdUsuario() {
+        return this.idUsuario;
     }
     
-    public void setId(UsuariosId id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    public int getIdRol() {
+        return this.idRol;
+    }
+    
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
     public String getEmail() {
         return this.email;

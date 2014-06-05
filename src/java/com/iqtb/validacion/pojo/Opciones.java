@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 
@@ -9,7 +9,8 @@ package com.iqtb.validacion.pojo;
 public class Opciones  implements java.io.Serializable {
 
 
-     private OpcionesId id;
+     private Integer idOpcion;
+     private int idPestania;
      private String opcion;
      private String href;
      private String descripcion;
@@ -19,24 +20,31 @@ public class Opciones  implements java.io.Serializable {
     }
 
 	
-    public Opciones(OpcionesId id, String opcion) {
-        this.id = id;
+    public Opciones(int idPestania, String opcion) {
+        this.idPestania = idPestania;
         this.opcion = opcion;
     }
-    public Opciones(OpcionesId id, String opcion, String href, String descripcion, String tipo) {
-       this.id = id;
+    public Opciones(int idPestania, String opcion, String href, String descripcion, String tipo) {
+       this.idPestania = idPestania;
        this.opcion = opcion;
        this.href = href;
        this.descripcion = descripcion;
        this.tipo = tipo;
     }
    
-    public OpcionesId getId() {
-        return this.id;
+    public Integer getIdOpcion() {
+        return this.idOpcion;
     }
     
-    public void setId(OpcionesId id) {
-        this.id = id;
+    public void setIdOpcion(Integer idOpcion) {
+        this.idOpcion = idOpcion;
+    }
+    public int getIdPestania() {
+        return this.idPestania;
+    }
+    
+    public void setIdPestania(int idPestania) {
+        this.idPestania = idPestania;
     }
     public String getOpcion() {
         return this.opcion;

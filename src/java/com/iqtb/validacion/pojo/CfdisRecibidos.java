@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 import java.math.BigDecimal;
@@ -11,7 +11,9 @@ import java.util.Date;
 public class CfdisRecibidos  implements java.io.Serializable {
 
 
-     private CfdisRecibidosId id;
+     private Integer idCfdiRecibido;
+     private int idSocioComercial;
+     private int idEmpresa;
      private String serie;
      private Integer folio;
      private String uuid;
@@ -27,8 +29,9 @@ public class CfdisRecibidos  implements java.io.Serializable {
     }
 
 	
-    public CfdisRecibidos(CfdisRecibidosId id, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado) {
-        this.id = id;
+    public CfdisRecibidos(int idSocioComercial, int idEmpresa, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado) {
+        this.idSocioComercial = idSocioComercial;
+        this.idEmpresa = idEmpresa;
         this.uuid = uuid;
         this.fecha = fecha;
         this.total = total;
@@ -36,8 +39,9 @@ public class CfdisRecibidos  implements java.io.Serializable {
         this.fechaRecepcion = fechaRecepcion;
         this.estado = estado;
     }
-    public CfdisRecibidos(CfdisRecibidosId id, String serie, Integer folio, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado, String error, Byte reportado) {
-       this.id = id;
+    public CfdisRecibidos(int idSocioComercial, int idEmpresa, String serie, Integer folio, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado, String error, Byte reportado) {
+       this.idSocioComercial = idSocioComercial;
+       this.idEmpresa = idEmpresa;
        this.serie = serie;
        this.folio = folio;
        this.uuid = uuid;
@@ -50,12 +54,26 @@ public class CfdisRecibidos  implements java.io.Serializable {
        this.reportado = reportado;
     }
    
-    public CfdisRecibidosId getId() {
-        return this.id;
+    public Integer getIdCfdiRecibido() {
+        return this.idCfdiRecibido;
     }
     
-    public void setId(CfdisRecibidosId id) {
-        this.id = id;
+    public void setIdCfdiRecibido(Integer idCfdiRecibido) {
+        this.idCfdiRecibido = idCfdiRecibido;
+    }
+    public int getIdSocioComercial() {
+        return this.idSocioComercial;
+    }
+    
+    public void setIdSocioComercial(int idSocioComercial) {
+        this.idSocioComercial = idSocioComercial;
+    }
+    public int getIdEmpresa() {
+        return this.idEmpresa;
+    }
+    
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     public String getSerie() {
         return this.serie;

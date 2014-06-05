@@ -36,10 +36,12 @@
 
         <h:form id="formSeleccionEmpresas">
             <p:panel style="visibility: hidden">
-                <p:dialog header="Seleccion de Empresa" widgetVar="dialogSeleccionEmpresa" resizable="false" modal="true" closable="false">
+                <p:dialog header="Selección de Empresa" widgetVar="dialogSeleccionEmpresa" resizable="false" modal="true" closable="false">
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                        <h:outputText value="Usuario"/><p:inputText id="itUsuario" value="#{mbAcceso.user}" readonly="true" style="width: 220px"/>
-                        <p:outputLabel/><p:selectOneMenu id="somEmpresas" value="#{mbAcceso.empresaSeleccionada}" label="Empresas" var="emp" style="width: 250px"> 
+                        <h:outputText value="Usuario"/>
+                        <p:inputText id="itUsuario" value="#{mbAcceso.user}" readonly="true" style="width: 220px"/>
+                        <p:outputLabel value="Empresa"/>
+                        <p:selectOneMenu id="somEmpresas" value="#{mbAcceso.empresaSeleccionada}" label="Empresas" var="emp" style="width: 250px"> 
                             <f:selectItem itemLabel="Seleccione una empresa" itemValue="vacio" id="clienteVacio"/>  
                             <f:selectItems value="#{mbAcceso.listaEmpresas}"/>  
                         </p:selectOneMenu>
@@ -49,7 +51,22 @@
                     </center>
                 </p:dialog>
             </p:panel>
-        </h:form> 
+        </h:form>
+        
+        <script type="text/javascript">
+            function mostrarDialogEmpresas(xhr, status, args){
+                if(args.mostarDialog){
+                    dialogSeleccionEmpresa.show();
+                }
+            }
+            
+            function existeSeleccionEmpresa(xhr, status, args){
+                if (!args.existeSeleccionEmpresa) {
+                    dialogSeleccionEmpresa.jq.effect("shake",{times: 5},500);
+                }
+            }
+        </script>
+        
     </h:body>
 </html>
 

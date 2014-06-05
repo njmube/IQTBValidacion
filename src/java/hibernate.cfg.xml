@@ -9,20 +9,20 @@
     <property name="hibernate.connection.password">mysql</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="com/iqtb/validacion/pojo/ConfiguracionesServicios.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/CfdisRecibidos.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/SociosComerciales.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/Pestanias.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Respaldos.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Usuarios.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Roles.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Servicios.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Empresas.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/RolesHasOpciones.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Opciones.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/Bitacora.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/CfdisRecibidos.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/ConfiguracionesEmpresas.hbm.xml"/>
-    <mapping resource="com/iqtb/validacion/pojo/UsuariosHasEmpresas.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/SociosComercialesEmail.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/UsuariosHasEmpresas.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Servicios.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Respaldos.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Opciones.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/SociosComerciales.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/RolesHasOpciones.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Roles.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Bitacora.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Empresas.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Usuarios.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/ConfiguracionesServicios.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

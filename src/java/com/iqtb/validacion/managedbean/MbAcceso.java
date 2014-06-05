@@ -1,10 +1,13 @@
 package com.iqtb.validacion.managedbean;
 
+import com.iqtb.validacion.dao.DaoEmpresa;
 import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.encrypt.Encrypt;
+import com.iqtb.validacion.pojo.Empresas;
 import com.iqtb.validacion.pojo.Usuarios;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -73,11 +76,24 @@ public class MbAcceso implements Serializable{
     
 
     public String login() {
+        boolean mostarDialog = false;
         try {
             
             this.usuario = new DaoUsuario().getByUserid(this.user);
             if (this.usuario.getPasskey().equals(Encrypt.getSHA512(this.pass + this.usuario.getSalt()))) {
-                return "/principal?faces-redirect=true";
+                List<Empresas> lista = new DaoEmpresa().getEmpresaById(this.usuario.getIdUsuario());
+                for (Empresas empresas : lista) {
+                    listaEmpresas.put(empresas.getRfc(), empresas.getRfc());
+                }
+                if (listaEmpresas.size() > 1) {
+                    mostarDialog = true;
+                }else{
+                    this.empresaSeleccionada = lista.get(0).getRfc();
+                    return "/principal?faces-redirect=true";
+                }
+//                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid()+" ha iniciado sessión");
+                empresaSeleccionada = null;
+                
             } else {
                 this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrecto");
             }
@@ -85,8 +101,10 @@ public class MbAcceso implements Serializable{
             this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrecto");
         }
         FacesContext.getCurrentInstance().addMessage(null, this.msg);
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.addCallbackParam("mostarDialog", mostarDialog);
 
-        return "/login";
+        return null;
     }
     
     public String logout(){
@@ -108,6 +126,6 @@ public class MbAcceso implements Serializable{
         }
         RequestContext context = RequestContext.getCurrentInstance();
         context.addCallbackParam("existeSeleccionEmpresa", existeSeleccionEmpresa);
-        return "/Template/general?faces-redirect=true";
+        return "/principal?faces-redirect=true";
     }
 }

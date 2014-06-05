@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -10,7 +10,10 @@ import java.util.Date;
 public class Bitacora  implements java.io.Serializable {
 
 
-     private BitacoraId id;
+     private Integer idBitacora;
+     private Integer idUsuario;
+     private int idServicio;
+     private int idEmpresa;
      private String descripcion;
      private Date fecha;
      private String tipo;
@@ -18,19 +21,50 @@ public class Bitacora  implements java.io.Serializable {
     public Bitacora() {
     }
 
-    public Bitacora(BitacoraId id, String descripcion, Date fecha, String tipo) {
-       this.id = id;
+	
+    public Bitacora(int idServicio, int idEmpresa, String descripcion, Date fecha, String tipo) {
+        this.idServicio = idServicio;
+        this.idEmpresa = idEmpresa;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.tipo = tipo;
+    }
+    public Bitacora(Integer idUsuario, int idServicio, int idEmpresa, String descripcion, Date fecha, String tipo) {
+       this.idUsuario = idUsuario;
+       this.idServicio = idServicio;
+       this.idEmpresa = idEmpresa;
        this.descripcion = descripcion;
        this.fecha = fecha;
        this.tipo = tipo;
     }
    
-    public BitacoraId getId() {
-        return this.id;
+    public Integer getIdBitacora() {
+        return this.idBitacora;
     }
     
-    public void setId(BitacoraId id) {
-        this.id = id;
+    public void setIdBitacora(Integer idBitacora) {
+        this.idBitacora = idBitacora;
+    }
+    public Integer getIdUsuario() {
+        return this.idUsuario;
+    }
+    
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    public int getIdServicio() {
+        return this.idServicio;
+    }
+    
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
+    }
+    public int getIdEmpresa() {
+        return this.idEmpresa;
+    }
+    
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     public String getDescripcion() {
         return this.descripcion;

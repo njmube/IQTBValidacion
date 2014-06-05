@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0 -->
+<!-- Generated 05-jun-2014 10:57:17 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.iqtb.validacion.pojo.Opciones" table="OPCIONES" catalog="iqtb">
-        <composite-id name="id" class="com.iqtb.validacion.pojo.OpcionesId">
-            <key-property name="idOpcion" type="int">
-                <column name="idOPCION" />
-            </key-property>
-            <key-property name="idPestania" type="int">
-                <column name="idPESTANIA" />
-            </key-property>
-        </composite-id>
+        <id name="idOpcion" type="java.lang.Integer">
+            <column name="idOPCION" />
+            <generator class="identity" />
+        </id>
+        <property name="idPestania" type="int">
+            <column name="idPESTANIA" not-null="true" />
+        </property>
         <property name="opcion" type="string">
             <column name="OPCION" length="45" not-null="true" />
         </property>

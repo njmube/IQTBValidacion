@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 04-jun-2014 13:10:04 by Hibernate Tools 3.6.0
+// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
 
 
 
@@ -9,7 +9,8 @@ package com.iqtb.validacion.pojo;
 public class SociosComerciales  implements java.io.Serializable {
 
 
-     private SociosComercialesId id;
+     private Integer idSocioComercial;
+     private int idEmpresa;
      private String nombre;
      private String rfc;
      private String calle;
@@ -31,14 +32,14 @@ public class SociosComerciales  implements java.io.Serializable {
     }
 
 	
-    public SociosComerciales(SociosComercialesId id, String nombre, String rfc, String calle) {
-        this.id = id;
+    public SociosComerciales(int idEmpresa, String nombre, String rfc, String calle) {
+        this.idEmpresa = idEmpresa;
         this.nombre = nombre;
         this.rfc = rfc;
         this.calle = calle;
     }
-    public SociosComerciales(SociosComercialesId id, String nombre, String rfc, String calle, String numExterior, String numInterior, String colonia, String localidad, String referencia, String municipio, String estado, String pais, String cp, String codigogln, String email, String telefono, String curp) {
-       this.id = id;
+    public SociosComerciales(int idEmpresa, String nombre, String rfc, String calle, String numExterior, String numInterior, String colonia, String localidad, String referencia, String municipio, String estado, String pais, String cp, String codigogln, String email, String telefono, String curp) {
+       this.idEmpresa = idEmpresa;
        this.nombre = nombre;
        this.rfc = rfc;
        this.calle = calle;
@@ -57,12 +58,19 @@ public class SociosComerciales  implements java.io.Serializable {
        this.curp = curp;
     }
    
-    public SociosComercialesId getId() {
-        return this.id;
+    public Integer getIdSocioComercial() {
+        return this.idSocioComercial;
     }
     
-    public void setId(SociosComercialesId id) {
-        this.id = id;
+    public void setIdSocioComercial(Integer idSocioComercial) {
+        this.idSocioComercial = idSocioComercial;
+    }
+    public int getIdEmpresa() {
+        return this.idEmpresa;
+    }
+    
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     public String getNombre() {
         return this.nombre;
