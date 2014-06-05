@@ -9,5 +9,6 @@ import org.hibernate.Session;
  */
 public interface InterfaceUsuario {
     public Usuarios getByUserid(String userid) throws Exception;
+    public boolean updateUsuario(Usuarios usuario) throws Exception;
     
 }

@@ -15,13 +15,13 @@ import org.hibernate.Transaction;
 public class DaoUsuario implements InterfaceUsuario {
 
     private Session session;
-    private Transaction transaction;
+    private Transaction tx;
 
     @Override
     public Usuarios getByUserid(String userId) throws Exception {
 
         session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
+        tx = session.beginTransaction();
 
         try {
             
@@ -33,14 +33,46 @@ public class DaoUsuario implements InterfaceUsuario {
 
             return usuario;
         } catch (HibernateException he) {
-            transaction.rollback();
+            session.getTransaction().rollback();
             throw he;
         }finally{
-            transaction.commit();
-            session.close();
+            tx.commit();
+            if (session.isOpen()) {
+                session.close();
+            } 
         }
 
         
+    }
+
+    @Override
+    public boolean updateUsuario(Usuarios usuario) throws Exception {
+        //session = HibernateUtil.getSessionFactory().openSession();
+        
+        Session se = HibernateUtil.getSessionFactory().openSession();
+        Transaction tr = se.beginTransaction();
+        //tx = session.beginTransaction();
+        System.out.println("idusuario "+usuario.getIdUsuario());
+        System.out.println("Nombre "+usuario.getNombre());
+        System.out.println("passkey "+usuario.getPasskey());
+        
+        try {
+            System.out.println("entro tyr");
+            se.saveOrUpdate(usuario);
+            System.out.println("session save");
+//            se.flush();
+            System.out.println("TRUE");
+            return true;
+        } catch (HibernateException he) {
+            se.getTransaction().rollback();
+            return false;
+        }finally{
+            System.out.println("FINALLY");
+            tr.commit();
+            if (se.isOpen()) {
+                se.close();
+            }
+        }
     }
 
 }

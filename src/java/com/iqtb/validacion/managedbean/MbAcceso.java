@@ -6,6 +6,8 @@ import com.iqtb.validacion.encrypt.Encrypt;
 import com.iqtb.validacion.pojo.Empresas;
 import com.iqtb.validacion.pojo.Usuarios;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,15 +16,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
+
 /**
  *
  * @author danielromero
  */
 @ManagedBean
 @SessionScoped
-public class MbAcceso implements Serializable{
+public class MbAcceso implements Serializable {
 
- private String user;
+    private String user;
     private String pass;
     private Usuarios usuario;
     private String empresaSeleccionada;
@@ -73,12 +76,11 @@ public class MbAcceso implements Serializable{
     public void setListaEmpresas(Map<String, String> listaEmpresas) {
         this.listaEmpresas = listaEmpresas;
     }
-    
 
     public String login() {
         boolean mostarDialog = false;
         try {
-            
+
             this.usuario = new DaoUsuario().getByUserid(this.user);
             if (this.usuario.getPasskey().equals(Encrypt.getSHA512(this.pass + this.usuario.getSalt()))) {
                 List<Empresas> lista = new DaoEmpresa().getEmpresaById(this.usuario.getIdUsuario());
@@ -87,13 +89,13 @@ public class MbAcceso implements Serializable{
                 }
                 if (listaEmpresas.size() > 1) {
                     mostarDialog = true;
-                }else{
+                } else {
                     this.empresaSeleccionada = lista.get(0).getRfc();
                     return "/principal?faces-redirect=true";
                 }
-//                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid()+" ha iniciado sessión");
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid()+" ha iniciado sessión");
                 empresaSeleccionada = null;
-                
+
             } else {
                 this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Usuario/Contraseña incorrecto");
             }
@@ -106,26 +108,71 @@ public class MbAcceso implements Serializable{
 
         return null;
     }
-    
-    public String logout(){
+
+    public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Session cerrada correctamente", null);
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        FacesContext.getCurrentInstance().addMessage(null, this.msg);
 
         return "/login?faces-redirect=true";
     }
-    
+
     public String existeSeleccionEmpresa() {
         boolean existeSeleccionEmpresa = false;
         if (!this.empresaSeleccionada.equals("vacio")) {
             existeSeleccionEmpresa = true;
         } else {
             this.msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Precaución", "Por favor seleccione una empresa");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+            FacesContext.getCurrentInstance().addMessage(null, this.msg);
             return null;
         }
         RequestContext context = RequestContext.getCurrentInstance();
         context.addCallbackParam("existeSeleccionEmpresa", existeSeleccionEmpresa);
         return "/principal?faces-redirect=true";
+    }
+
+    public String restablecerContrasenia() throws Exception {
+        String newPass;
+        String newPassKey;
+        Usuarios user;
+        try {
+            user = new DaoUsuario().getByUserid(this.user);
+            System.out.println("Obteniendo Usuario por medio de USERID");
+            System.out.println("Usuario "+user.getIdUsuario());
+            System.out.println("Usuario "+user.getSalt());
+            newPass = Encrypt.getContraseniaAleatoria(8);
+            System.out.println("Se ha generado una nueva contraseña para le usuario: "+newPass);
+            newPassKey = Encrypt.getSHA512(newPass + user.getSalt());
+            System.out.println("se ha generado un nuevo PASSKEY para el usaurio: "+newPassKey);
+            
+            Date fReg = new Date();
+            long fecha = fReg.getTime();
+            Timestamp timestamp = new Timestamp(fecha);
+            user.setPasskey(newPassKey);
+            System.out.println("setPasskey");
+            user.setLastAction(timestamp);
+            boolean update = new DaoUsuario().updateUsuario(user);
+            System.out.println("Usuario Actualizado" +update);
+
+            if (update) {
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La contraseña ha sido enviada al correo electronico " + user.getEmail());
+                FacesContext.getCurrentInstance().addMessage(null, this.msg);
+                return "/login?faces-redirect=true";
+
+            } else {
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se ha podido restablecer la contraseña, Por favor intente de nuevo.");
+                FacesContext.getCurrentInstance().addMessage(null, this.msg);
+                return null;
+            }
+        } catch (Exception e) {
+            this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se ha podido restablecer la contraseña, Por favor intente de nuevo.");
+            FacesContext.getCurrentInstance().addMessage(null, this.msg);
+            return null;
+        }
+    }
+    
+    public String recuperarContrasenia(){
+        this.user = "";
+        return "/Usuario/restablecer?faces-redirect=true";
     }
 }

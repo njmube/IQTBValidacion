@@ -10,16 +10,16 @@ import org.apache.commons.codec.binary.Base64;
  * @author danielromero
  */
 public class Encrypt {
-    
-    public static String getSALT(int size) throws NoSuchAlgorithmException{
+
+    public static String getSALT(int size) throws NoSuchAlgorithmException {
         SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
         byte[] seed = secureRandom.generateSeed(size);
 
         secureRandom = null;
         return Base64.encodeBase64String(seed);
     }
-    
-    public static String getSHA512(String cadena) throws NoSuchAlgorithmException{
+
+    public static String getSHA512(String cadena) throws NoSuchAlgorithmException {
         StringBuilder sb = new StringBuilder();
 
         try {
@@ -33,16 +33,33 @@ public class Encrypt {
                 sb.append(Integer.toString((mb[i] & 0xff) + 0x100, 16).substring(1));
             }
         } catch (NoSuchAlgorithmException ex) {
-           throw ex;
+            throw ex;
         }
 
         return sb.toString();
     }
-    
+
     public static boolean verifySHASaltPassword(String testPass, String salt, String passKey) throws NoSuchAlgorithmException {
         String hash = getSHA512(testPass + salt);
-        
+
         return hash.equals(passKey);
     }
+    public static String getContraseniaAleatoria(int numCaracteres){
+        String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$*+#";
+        String contrasenia = "";
+        int longitud = base.length();
+
+        for (int i = 0; i < numCaracteres; i++) { 
+            int numero = (int) (Math.random() * (longitud)); 
+            String caracter = base.substring(numero, numero + 1); 
+            contrasenia = contrasenia + caracter; 
+        }
+        return contrasenia;
+    }
     
+//    public static void main(String[] args) {
+//        String a = getContraseniaAleatoria(8);
+//        System.out.println("Contraseña: "+a);
+//    }
+
 }

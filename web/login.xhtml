@@ -31,8 +31,8 @@
                 <!-- oncomplete="mostrarDialogEmpresas(xhr, status, args)" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario"-->
                 <br/>
                 <br/>
-                <h:link style="font-size: small; color: #036fab" value="¿Olvidaste tu contraseña?" outcome="/login"/>
-<!--                <span style="font-size: x-small"><strong><a href="">¿Olvidaste tu contraseña?</a></strong></span>-->
+                <!--<h:link style="font-size: small; color: #036fab;" value="¿Olvidaste tu contraseña?" outcome="/Usuario/restablecer?faces-redirect=true"/>-->
+                <p:commandLink style="font-size: small; color: #036fab;" value="¿Olvidaste tu contraseña?" action="#{mbAcceso.recuperarContrasenia()}"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
             </h:form>
