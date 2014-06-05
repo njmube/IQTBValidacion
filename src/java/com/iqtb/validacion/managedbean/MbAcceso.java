@@ -4,10 +4,13 @@ import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.encrypt.Encrypt;
 import com.iqtb.validacion.pojo.Usuarios;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 /**
  *
  * @author danielromero
@@ -19,10 +22,13 @@ public class MbAcceso implements Serializable{
  private String user;
     private String pass;
     private Usuarios usuario;
+    private String empresaSeleccionada;
+    private Map<String, String> listaEmpresas;
     private FacesMessage msg;
 
     public MbAcceso() {
         this.usuario = new Usuarios();
+        this.listaEmpresas = new HashMap<String, String>();
     }
 
     public String getUser() {
@@ -49,6 +55,23 @@ public class MbAcceso implements Serializable{
         this.usuario = usuario;
     }
 
+    public String getEmpresaSeleccionada() {
+        return empresaSeleccionada;
+    }
+
+    public void setEmpresaSeleccionada(String empresaSeleccionada) {
+        this.empresaSeleccionada = empresaSeleccionada;
+    }
+
+    public Map<String, String> getListaEmpresas() {
+        return listaEmpresas;
+    }
+
+    public void setListaEmpresas(Map<String, String> listaEmpresas) {
+        this.listaEmpresas = listaEmpresas;
+    }
+    
+
     public String login() {
         try {
             
@@ -72,5 +95,19 @@ public class MbAcceso implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         return "/login?faces-redirect=true";
+    }
+    
+    public String existeSeleccionEmpresa() {
+        boolean existeSeleccionEmpresa = false;
+        if (!this.empresaSeleccionada.equals("vacio")) {
+            existeSeleccionEmpresa = true;
+        } else {
+            this.msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Precaución", "Por favor seleccione una empresa");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+            return null;
+        }
+        RequestContext context = RequestContext.getCurrentInstance();
+        context.addCallbackParam("existeSeleccionEmpresa", existeSeleccionEmpresa);
+        return "/Template/general?faces-redirect=true";
     }
 }
