@@ -29,6 +29,10 @@
                 <section class="seccionBotones">
                     <p:commandButton id="btn" value="Ingresar" action="#{mbAcceso.login()}" styleClass="btnLogin" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario" oncomplete="mostrarDialogEmpresas(xhr, status, args)"/>
                 <!-- oncomplete="mostrarDialogEmpresas(xhr, status, args)" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario"-->
+                <br/>
+                <br/>
+                <h:link style="font-size: small; color: #036fab" value="¿Olvidaste tu contraseña?" outcome="/login"/>
+<!--                <span style="font-size: x-small"><strong><a href="">¿Olvidaste tu contraseña?</a></strong></span>-->
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
             </h:form>
