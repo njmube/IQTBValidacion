@@ -29,6 +29,7 @@ public class MbAcceso implements Serializable {
     private String user;
     private String pass;
     private Usuarios usuario;
+    private Usuarios usuarioContraseña; 
     private String empresaSeleccionada;
     private Map<String, String> listaEmpresas;
     private FacesMessage msg;
@@ -36,6 +37,14 @@ public class MbAcceso implements Serializable {
     public MbAcceso() {
         this.usuario = new Usuarios();
         this.listaEmpresas = new HashMap<String, String>();
+    }
+
+    public Usuarios getUsuarioContraseña() {
+        return usuarioContraseña;
+    }
+
+    public void setUsuarioContraseña(Usuarios usuarioContraseña) {
+        this.usuarioContraseña = usuarioContraseña;
     }
 
     public String getUser() {
@@ -132,55 +141,59 @@ public class MbAcceso implements Serializable {
         return "/principal?faces-redirect=true";
     }
 
-    public String restablecerContrasenia() throws Exception {
+    public void restablecerContrasenia() throws Exception {
         String newPass;
         String newPassKey;
-        Usuarios user;
         try {
-            user = new DaoUsuario().getByUserid(this.user);
+            this.usuarioContraseña = new DaoUsuario().getByUserid(this.user);
 
             if (this.user.equals("")) {
                 this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Por favor introdusca usuario para restablecer contraseña.");
                 FacesContext.getCurrentInstance().addMessage(null, this.msg);
-                return null;
+                return ;
             }
             newPass = Encrypt.getContraseniaAleatoria(8);
             System.out.println("Se ha generado una nueva contraseña para le usuario: " + newPass);
-            newPassKey = Encrypt.getSHA512(newPass + user.getSalt());
+            newPassKey = Encrypt.getSHA512(newPass + this.usuarioContraseña.getSalt());
 
             Date fReg = new Date();
             long fecha = fReg.getTime();
             Timestamp timestamp = new Timestamp(fecha);
-            user.setPasskey(newPassKey);
-            user.setLastAction(timestamp);
-            boolean update = new DaoUsuario().updateUsuario(user);
+            this.usuarioContraseña.setPasskey(newPassKey);
+            this.usuarioContraseña.setLastAction(timestamp);
+            boolean update = new DaoUsuario().updateUsuario(this.usuarioContraseña);
 
             String remitente = "pruebas.email001@gmail.com";
             String contrasenia = "passpruebas";
-            String destinatario = user.getEmail();
+            String destinatario = this.usuarioContraseña.getEmail();
             String asunto = "IQTB Validación: se ha restablecido su contraseña";
             String contenido = "Contraseña: "+newPass;
             boolean respuestaEmail = Email.envioEmail(remitente, contrasenia, destinatario, asunto, contenido);
             if (update && respuestaEmail) {
 
-                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La contraseña ha sido enviada al correo electronico " + user.getEmail());
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La contraseña se ha enviado al correo electrónico.");
                 FacesContext.getCurrentInstance().addMessage(null, this.msg);
-                return "/login?faces-redirect=true";
+//                return "/login?faces-redirect=true";
 
             } else {
                 this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se ha podido restablecer la contraseña, Por favor intente de nuevo.");
                 FacesContext.getCurrentInstance().addMessage(null, this.msg);
-                return null;
+                return;
             }
         } catch (Exception e) {
             this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se ha podido restablecer la contraseña, Por favor intente de nuevo.");
             FacesContext.getCurrentInstance().addMessage(null, this.msg);
-            return null;
+            return;
         }
     }
 
     public String recuperarContrasenia() {
         this.user = "";
         return "/Usuario/restablecer?faces-redirect=true";
+    }
+    
+    public String irLogin() {
+        this.user = "";
+        return "/login?faces-redirect=true";
     }
 }

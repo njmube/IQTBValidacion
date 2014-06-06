@@ -25,12 +25,15 @@
                 <p></p>
                 <p><h:inputText pt:placeholder="Introdusca Usuario para restablecer contraseña" value="#{mbAcceso.user}" /></p>
                 <section class="seccionBotones">
-                    <p:commandButton id="btn" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer"/>
+                    <p:commandButton id="btn" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="confirmation.show()"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
+                <p:confirmDialog message="La contraseña se ha enviado al correo electrónico #{mbAcceso.usuarioContraseña.email}" showEffect="fade" 
+                                 header="Contraseña restablecida" severity="info" widgetVar="confirmation" style="font-size: small;" width="350px" closable="false">
+                    <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" icon="ui-icon-circle-check"/> </center>
+                </p:confirmDialog>  
             </h:form>
         </section>
-        
     </h:body>
 </html>
 
