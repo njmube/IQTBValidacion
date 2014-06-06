@@ -3,6 +3,7 @@ package com.iqtb.validacion.managedbean;
 import com.iqtb.validacion.dao.DaoEmpresa;
 import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.encrypt.Encrypt;
+import com.iqtb.validacion.mail.Email;
 import com.iqtb.validacion.pojo.Empresas;
 import com.iqtb.validacion.pojo.Usuarios;
 import java.io.Serializable;
@@ -93,7 +94,7 @@ public class MbAcceso implements Serializable {
                     this.empresaSeleccionada = lista.get(0).getRfc();
                     return "/principal?faces-redirect=true";
                 }
-                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid()+" ha iniciado sessión");
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid() + " ha iniciado sessión");
                 empresaSeleccionada = null;
 
             } else {
@@ -137,24 +138,31 @@ public class MbAcceso implements Serializable {
         Usuarios user;
         try {
             user = new DaoUsuario().getByUserid(this.user);
-            System.out.println("Obteniendo Usuario por medio de USERID");
-            System.out.println("Usuario "+user.getIdUsuario());
-            System.out.println("Usuario "+user.getSalt());
+
+            if (this.user.equals("")) {
+                this.msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Por favor introdusca usuario para restablecer contraseña.");
+                FacesContext.getCurrentInstance().addMessage(null, this.msg);
+                return null;
+            }
             newPass = Encrypt.getContraseniaAleatoria(8);
-            System.out.println("Se ha generado una nueva contraseña para le usuario: "+newPass);
+            System.out.println("Se ha generado una nueva contraseña para le usuario: " + newPass);
             newPassKey = Encrypt.getSHA512(newPass + user.getSalt());
-            System.out.println("se ha generado un nuevo PASSKEY para el usaurio: "+newPassKey);
-            
+
             Date fReg = new Date();
             long fecha = fReg.getTime();
             Timestamp timestamp = new Timestamp(fecha);
             user.setPasskey(newPassKey);
-            System.out.println("setPasskey");
             user.setLastAction(timestamp);
             boolean update = new DaoUsuario().updateUsuario(user);
-            System.out.println("Usuario Actualizado" +update);
 
-            if (update) {
+            String remitente = "pruebas.email001@gmail.com";
+            String contrasenia = "passpruebas";
+            String destinatario = user.getEmail();
+            String asunto = "IQTB Validación: se ha restablecido su contraseña";
+            String contenido = "Contraseña: "+newPass;
+            boolean respuestaEmail = Email.envioEmail(remitente, contrasenia, destinatario, asunto, contenido);
+            if (update && respuestaEmail) {
+
                 this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", "La contraseña ha sido enviada al correo electronico " + user.getEmail());
                 FacesContext.getCurrentInstance().addMessage(null, this.msg);
                 return "/login?faces-redirect=true";
@@ -170,8 +178,8 @@ public class MbAcceso implements Serializable {
             return null;
         }
     }
-    
-    public String recuperarContrasenia(){
+
+    public String recuperarContrasenia() {
         this.user = "";
         return "/Usuario/restablecer?faces-redirect=true";
     }
