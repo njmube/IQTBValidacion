@@ -21,15 +21,18 @@
                     </p:panel>        
                     <h2>IQTB Validación</h2>
                 </h:panelGrid>
-                <!--<h3>Introcusca su Usuario para restablecer su contraseña</h3>-->
+                <p:outputLabel value="Introdusca una nueva contraseña" />
+                <!--<h3>Introdusca una nueva contraseña</h3>-->
                 <p></p>
-                <p><h:inputText pt:placeholder="Introdusca Usuario para restablecer contraseña" value="#{mbAcceso.user}" /></p>
+                <!--<p><h:inputText pt:placeholder="Usuario" value="{mbAcceso.user}" readonly="true"/></p>-->
+                <p><h:inputSecret pt:placeholder="Introdusca su nueva contraseña" value="#{mbAcceso.pass}" /></p>
+                <p><h:inputSecret pt:placeholder="Confirmar Contraseña" value="#{mbAcceso.confirmarPass}" /></p>
                 <section class="seccionBotones">
-                    <p:commandButton id="btn" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="confirmation.show()"/>
+                    <p:commandButton id="btn" value="Aceptar" action="#{mbAcceso.nuevaContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="confirmation.show()"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
-                <p:confirmDialog message="La contraseña se ha enviado al correo electrónico #{mbAcceso.usuarioContraseña.email}" showEffect="fade" 
-                                 header="Contraseña restablecida" severity="info" widgetVar="confirmation" style="font-size: small;" closable="false">
+                <p:confirmDialog message="La contraseña ha sido modificada exitosamente" showEffect="fade" 
+                                 header="Contraseña modificada" severity="info" widgetVar="confirmation" style="font-size: small;" closable="false">
                     <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" icon="ui-icon-circle-check"/> </center>
                 </p:confirmDialog>  
             </h:form>

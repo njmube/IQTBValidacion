@@ -21,8 +21,11 @@
                 </div>
                 <div id="divSesionUsuario">
                     <span>
-                        <strong>Usuario:</strong>
+                        <!--<strong>Usuario: </strong>-->
                         <p:outputLabel value="#{mbAcceso.usuario.userid}" />
+                        <br/>
+                        <!--<strong>Empresa: </strong>-->
+                        <p:outputLabel value="#{mbAcceso.empresaSeleccionada}" />
                         <!--<p:commandButton value="Salir" icon="ui-icon-circle-close" action="{mbAcceso.logout()}"/>-->
                     </span>
                 </div>
@@ -37,10 +40,23 @@
                                 </p:submenu>
                             </p:column>   
                         </p:submenu>
-                        <p:menuitem value="TabMenu" outcome="/principal" icon="ui-icon-extlink"/>
+                        <p:menuitem value="Salir"  oncomplete="dialogLogout.show()" icon="ui-icon-extlink"/>
                     </p:megaMenu> 
                 </div>
             </h:form>
+            
+            <h:form id="frmLogout">
+                    <p:confirmDialog id="confirmDialog" message="¿Deseas salir de la pagina?" header="Cerrar Sesión"
+                                     severity="alert" widgetVar="dialogLogout" showEffect="fade" hideEffect="fade" closable="false">
+                        <h:panelGrid columns="3" cellspacing="5" >
+                            <p:commandButton id="decline" value="Cancelar" onclick="dialogSalir.hide()" icon="ui-icon-close"/>
+                            <p:panel style="visibility: hidden"/>
+                            <p:commandButton id="confirm" value="Aceptar" update="" oncomplete="dialogSalir.hide()" action="#{mbAcceso.logout()}" icon="ui-icon-check"/>                        
+                        </h:panelGrid>
+
+                    </p:confirmDialog>
+                </h:form>
+            
             <ui:insert name="top">Top</ui:insert>
         </div>
         <div>

@@ -1,8 +1,9 @@
 #divSesionUsuario
 {
     position: fixed;
-    right: 550px;
-    top: 15px;
+    right: 260px;
+    top: 25px;
+    text-align: right;
 }
 
 #divSesionUsuario > span

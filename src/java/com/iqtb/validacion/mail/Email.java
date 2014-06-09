@@ -28,7 +28,7 @@ public class Email {
             props.setProperty("mail.smtp.auth", "true");
             
             Session session = Session.getDefaultInstance(props, null);
-            session.setDebug(true);
+//            session.setDebug(true);
             
             // Se compone la parte del texto
             BodyPart texto = new MimeBodyPart();
