@@ -22,9 +22,6 @@ import org.hibernate.Transaction;
  */
 public class DaoEmpresa implements InterfaceEmpresa {
 
-    private Session session;
-    private Transaction tx;
-
     @Override
     public List<Empresas> getEmpresaById(Integer idUsuario) throws Exception {
         List<Empresas> listaEmpresas = new ArrayList<Empresas>();
@@ -32,8 +29,8 @@ public class DaoEmpresa implements InterfaceEmpresa {
         List<UsuariosHasEmpresasId> lista = new DaoUsuarioEmpresa().getEmpresasByIdUsuario(idUsuario);
 
         for (UsuariosHasEmpresasId usuariosHasEmpresasId : lista) {
-            session = HibernateUtil.getSessionFactory().openSession();
-            tx = session.beginTransaction();
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction tx = session.beginTransaction();
             try {
                 String hql = "from Empresas where idEmpresa = :IDEMPRESA";
                 Query query = session.createQuery(hql);
@@ -52,13 +49,48 @@ public class DaoEmpresa implements InterfaceEmpresa {
         }
         return listaEmpresas;
     }
-    
-//    public static void main(String[] args) throws Exception {
-//        List<Empresas> list = new DaoEmpresa().getEmpresaById(1);
-//        
-//        for (Empresas empresas : list) {
-//            System.out.println("Empresa: " + empresas.getRfc());
-//        }
-//    }
+
+    @Override
+    public Empresas getEmpresaByRFC(String rfc) throws Exception {
+        Empresas empresa = null;
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            String hql = "from Empresas where rfc = :RFC";
+            Query query = session.createQuery(hql);
+            query.setParameter("RFC", rfc);
+            empresa = (Empresas) query.uniqueResult();
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+            throw he;
+        }finally{
+            tx.commit();
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return empresa;
+    }
+
+    @Override
+    public boolean updateEmpresa(Empresas empresa) throws Exception {
+        boolean update = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        
+        try {
+            session.saveOrUpdate(empresa);
+            update = true;
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        }finally{
+            tx.commit();
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return update;
+    }
 
 }

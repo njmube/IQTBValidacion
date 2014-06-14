@@ -12,13 +12,18 @@
 }
 
 #divMenu{
-    margin-top: 35px;
+    margin-top: 25px;
     margin-left: 120px;
 }
 
+#divH1{
+    margin-top: -35px;
+    margin-left: 200px;
+}
+
 #top{
-    /*background: radial-gradient(circle, #036fab, white);*/
-    background-color: #036fab;
+    /*background: radial-gradient(circle, #036fab, white); #4682B4*/
+    background-color: #4682B4;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7);
     color: #000;
     border: 1.5px solid #000000;
@@ -48,13 +53,13 @@
     margin: 1px auto;
     margin-top: 5px;
     width: 1050px;
-    height: 575px;
+    height: 600px;
     position: relative;
     border-radius: 7px;
 }
 
-#left{
-    /*background-color: #c2dfef;*/
+/*#left{
+    background-color: #c2dfef;
     width: 20%;
     float: left;
     padding: 1px;
@@ -66,11 +71,11 @@
 }
 
 .left_content {
-    /*background-color: rgb;*/
+    background-color: rgb;
     padding: 5px;
     margin-left: 20%;
     height: 560px;
     border-radius: 7px;
     margin-bottom: -10px;
-}
+}*/
 

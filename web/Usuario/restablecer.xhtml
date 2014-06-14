@@ -25,7 +25,8 @@
                 <p></p>
                 <p><h:inputText pt:placeholder="Introdusca Usuario para restablecer contraseña" value="#{mbAcceso.user}" /></p>
                 <section class="seccionBotones">
-                    <p:commandButton id="btn" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="confirmation.show()"/>
+                    <p:commandButton id="btnAtras" value="Atras" action="#{mbAcceso.irLogin()}" styleClass="btnLogin" update="frmRestablecer"/>
+                    <p:commandButton id="btnRestablecer" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update="frmRestablecer" oncomplete="confirmation.show()"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
                 <p:confirmDialog message="La contraseña se ha enviado al correo electrónico #{mbAcceso.usuarioContraseña.email}" showEffect="fade" 

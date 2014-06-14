@@ -6,12 +6,19 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Acceso</title>
+        <title>IQTB Validación</title>
         <link rel="stylesheet" href="/IQTBValidacion/resources/css/cssLogin.css"/>
         <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
     </h:head>
     <h:body>
-        <p:growl showDetail="true" life="5000" autoUpdate="true"/>
+        
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
+
+            <p:dialog modal="true" widgetVar="statusDialog" header="Cargando ..."   
+                      draggable="false" closable="false" resizable="false" style="font-size: small">  
+            <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
+            </p:dialog>
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
 
         <section class="contenedorLogin">
             <h:form class="formulario">  
@@ -25,14 +32,11 @@
                 <p></p>
                 <p><h:inputText pt:placeholder="Usuario" value="#{mbAcceso.user}" /></p>
                 <p><h:inputSecret pt:placeholder="Contraseña" value="#{mbAcceso.pass}" /></p>
-                <!--<h:messages infoStyle="color: blue;list-style:none;" errorStyle="color:red;list-style:none;" warnStyle="color:orange;list-style:none"/>-->
                 <section class="seccionBotones">
                     <p:commandButton id="btn" value="Ingresar" action="#{mbAcceso.login()}" styleClass="btnLogin" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario" oncomplete="mostrarDialogEmpresas(xhr, status, args)"/>
-                <!-- oncomplete="mostrarDialogEmpresas(xhr, status, args)" update=":formSeleccionEmpresas:somEmpresas, :formSeleccionEmpresas:itUsuario"-->
                 <br/>
                 <br/>
-                <!--<h:link style="font-size: small; color: #036fab;" value="¿Olvidaste tu contraseña?" outcome="/Usuario/restablecer?faces-redirect=true"/>-->
-                <p:commandLink style="font-size: small; color: #036fab;" value="¿Olvidaste tu contraseña?" action="#{mbAcceso.recuperarContrasenia()}"/>
+                <p:commandLink style="font-size: small; color: #036fab;" value="¿Olvidó su contraseña?" action="#{mbAcceso.recuperarContrasenia()}"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
             </h:form>

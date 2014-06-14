@@ -16,6 +16,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -34,6 +35,8 @@ public class MbAcceso implements Serializable {
     private String empresaSeleccionada;
     private Map<String, String> listaEmpresas;
     private FacesMessage msg;
+//    private HttpServletRequest httpServletRequest;
+//    private FacesContext faceContext;
 
     public MbAcceso() {
         this.usuario = new Usuarios();
@@ -118,7 +121,7 @@ public class MbAcceso implements Serializable {
                         this.empresaSeleccionada = lista.get(0).getRfc();
                         return "/principal?faces-redirect=true";
                     }
-
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", this.usuario);
                     this.usuario.setEstado("AUTENTICADO");
                     this.usuario.setIntentosFallidos(0);
                     Date fReg = new Date();
@@ -127,7 +130,7 @@ public class MbAcceso implements Serializable {
                     this.usuario.setLastAction(timestamp);
                     update = new DaoUsuario().updateUsuario(this.usuario);
                     if (update) {
-                        this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid() + " ha iniciado sessión");
+                        this.msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto", this.usuario.getUserid() + " seleccione una empresa para continuar.");
                     }
                     empresaSeleccionada = null;
                 } else {
@@ -180,7 +183,8 @@ public class MbAcceso implements Serializable {
 
     public String logout() {
         boolean update = false;
-
+        String sesioinUsuario = ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         try {
             this.usuario.setEstado("ACTIVO");
             Date fReg = new Date();
@@ -202,13 +206,23 @@ public class MbAcceso implements Serializable {
         }
         return null;
     }
+    
+    public boolean getSession() {
+        boolean estado;
+        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") == null) {
+            estado = false;
+        } else {
+            estado = true;
+        }
+        return estado;
+    }
 
     public String existeSeleccionEmpresa() {
         boolean existeSeleccionEmpresa = false;
         if (!this.empresaSeleccionada.equals("vacio")) {
             existeSeleccionEmpresa = true;
         } else {
-            this.msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Precaución", "Por favor seleccione una empresa");
+            this.msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Precaución", "Por favor, seleccione una empresa");
             FacesContext.getCurrentInstance().addMessage(null, this.msg);
             return null;
         }
@@ -308,5 +322,21 @@ public class MbAcceso implements Serializable {
             
         }
         return;
+    }
+    
+    public String irCDFIs(){
+        FacesContext faceContext = FacesContext.getCurrentInstance();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
+        System.out.println("MbAceso Empresa Seleccionada enviada a CFDIs: " + this.empresaSeleccionada);
+        httpServletRequest.getSession().setAttribute("empresaSeleccionada", this.empresaSeleccionada);
+        return "/CFDI/recibidos?faces-redirect=true";
+    }
+    
+    public String irConfiguracion(){
+        FacesContext faceContext = FacesContext.getCurrentInstance();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
+        System.out.println("MbAceso Empresa Seleccionada enviada a Configuracion: " + this.empresaSeleccionada);
+        httpServletRequest.getSession().setAttribute("empresaSeleccionada", this.empresaSeleccionada);
+        return "/Configuracion/configuracion?faces-redirect=true";
     }
 }

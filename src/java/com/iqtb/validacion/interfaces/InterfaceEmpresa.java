@@ -16,5 +16,7 @@ import java.util.List;
 public interface InterfaceEmpresa {
     
     public List<Empresas> getEmpresaById(Integer idUsuario) throws Exception;
+    public Empresas getEmpresaByRFC(String rfc) throws Exception;
+    public boolean updateEmpresa(Empresas empresa) throws Exception;
     
 }

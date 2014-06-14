@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../Templates/general.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+            </ui:define>
+
+            <ui:define name="right">
+            </ui:define>
+
+            <ui:define name="content">
+
+                <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
+
+                <p:dialog modal="true" widgetVar="statusDialog" header="Cargando ..."   
+                          draggable="false" closable="false" resizable="false" style="font-size: small">  
+                    <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
+                </p:dialog> 
+                <p:growl id="msnGeneral" showDetail="true" autoUpdate="true" sticky="false"/>
+
+                <h:form id="frmCFDIs">
+
+                    <p:panel id="panelCFDIs" style="width: 100%; font-size: x-small; border-style: hidden; background: border-box">
+                        <p:dataTable id="tableCfdis" var="item" value="#{mbCfdisRecibidos.CFDIs}" paginator="true" rows="10" 
+                                     selection="#{mbCfdisRecibidos.cfdisSeleccionados}" rowKey="#{item.idCfdiRecibido}" filteredValue="#{mbCfdisRecibidos.filtroCFDIs}"
+                                     styleClass="tabla">
+                            <f:facet name="header"><p:outputLabel value="Lista de CFDIs" style="font-size: large"/></f:facet>
+                            <p:column selectionMode="multiple" style="width:2%;" />
+                            <p:column headerText="Fecha Emisión" filterBy="fecha">
+                                <h:outputText value="#{item.fecha}"/>
+                            </p:column>
+                            <p:column headerText="Serie/Folio" filterBy="serie">
+                                <h:outputText value="#{item.serie != null ? item.serie : 'Sin Serie'} / #{item.folio != null ? item.folio : 'Sin Folio'}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Recepción" filterBy="fechaRecepcion">
+                                <h:outputText value="#{item.fechaRecepcion}"/>
+                            </p:column>
+                            <p:column headerText="RFC Socio comercial" filterBy="idSocioComercial">
+                                <h:outputText value="#{item.idSocioComercial}"/>
+                            </p:column>
+                            <p:column headerText="Monto Total">
+                                <h:outputText value="#{item.total}"/>
+                            </p:column>
+                            <p:column headerText="Estado" filterBy="estado" style="width: 3%;">
+                                <h:outputText value="#{item.estado}"/>
+                            </p:column>
+                            <p:column headerText="Descargar" style="width: 5%;">
+                                <h:panelGrid columns="2" style="border-style: hidden; width: 5%;">
+                                    <p:commandLink id="downloadPDF" actionListener="/principal">
+                                        <p:graphicImage value="/resources/images/pdf.jpg" width="35" height="15"/>
+                                    </p:commandLink>
+
+                                    <p:commandLink id="downloadXML" actionListener="/principal">
+                                        <p:graphicImage value="/resources/images/xml.jpg" width="35" height="15"/>
+                                    </p:commandLink>
+                                </h:panelGrid>
+                                <!--<h:outputText value="{item.idEmpresa}"/>-->
+                            </p:column>
+                            <f:facet name="footer">
+                                <center>
+                                    <h:panelGrid columns="2" style="border-style: hidden; width: 70%; text-align: center">
+                                        <p:commandButton id="btnValidarCFDI" update=":frmCFDIs" icon="ui-icon-circle-check" value="Validar Comprobantes" styleClass="boton"/>
+                                        <p:commandButton id="btnDeleteCFDI" value="Eliminar Comprobantes" actionListener="#{mbCfdisRecibidos.existeSeleccionCFDI()}" update=":frmDeleteCFDI:confirmDialog" oncomplete="showDialogDelete(xhr, status, args)" icon="ui-icon-trash"  styleClass="boton">
+                                            <f:param name="nombreParametro" value="eliminarCFDI"/>
+                                        </p:commandButton>
+                                    </h:panelGrid>
+                                </center>
+                            </f:facet>    
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+
+                <script type='text/javascript'>
+                    function showDialogDelete(xhr, status, args) {
+                        if (args.estadoCFDI) {
+                            dialogCFDIDelete.show();
+                        }
+                    }
+                </script>
+
+                <h:form id="frmDeleteCFDI">
+                    <p:confirmDialog id="confirmDialog" message="¿Desea eliminar los CFDIs seleccionados?" header="Eliminar CFDIs" 
+                                     severity="alert" widgetVar="dialogCFDIDelete"  showEffect="fade" hideEffect="fade" closable="close">
+                        <h:panelGrid columns="3" cellspacing="5" >
+                            <p:commandButton id="declineDeletePlantilla" value="Cancelar" onclick="dialogCFDIDelete.hide()" icon="ui-icon-close"/>
+                            <p:panel style="visibility: hidden"/>
+                            <p:commandButton id="confirmDeletePlantilla" value="Aceptar" update=":frmCFDIs:tableCfdis" 
+                                             oncomplete="dialogCFDIDelete.hide()" actionListener="#{mbCfdisRecibidos.deleteCFDIs()}" icon="ui-icon-check"/>
+                        </h:panelGrid>
+                    </p:confirmDialog>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

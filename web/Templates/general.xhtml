@@ -10,28 +10,48 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Validación</title>
+        <h:outputStylesheet name="./css/cssEstilo.css"/>
+        <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
+        <title>IQTB Validación</title>
     </h:head>
 
     <h:body>
+
+        <h:form id="frmIdle">
+            <p:idleMonitor timeout="1800000" onidle="dialogIdle.show()" />
+            <p:confirmDialog id="dialog" header="Sesión caducada" message="La sesión ha caducado, por favor, pulse el siguiente botón para volver a aceder a la aplicación" widgetVar="dialogIdle" closable="false">
+                <center><p:commandButton id="btnTimeOut" value="Aceptar" action="#{mbAcceso.logout()}" oncomplete="dialogIdle.hide()"/></center>
+            </p:confirmDialog>
+        </h:form>
+
+        <script type="text/javascript">
+            function cerrar() {
+                document.getElementById('frmIdle:btnTimeOut').click();
+            }
+        </script>
+
         <div id="top">
             <h:form>
                 <div id="logo">
                     <p:graphicImage value="/resources/images/iqtb.png" width="110" height="110"/> 
                 </div>
+                <div id="divH1"><h1>IQTB Validación</h1></div>
                 <div id="divSesionUsuario">
                     <span>
-                        <!--<strong>Usuario: </strong>-->
                         <p:outputLabel value="#{mbAcceso.usuario.userid}" />
                         <br/>
-                        <!--<strong>Empresa: </strong>-->
                         <p:outputLabel value="#{mbAcceso.empresaSeleccionada}" />
-                        <!--<p:commandButton value="Salir" icon="ui-icon-circle-close" action="{mbAcceso.logout()}"/>-->
+                        <p></p>
+                        <p:commandLink id="cambiarContrasenia" actionListener="/principal">
+                            <p:outputLabel value="Cambiar contraseña" />
+                        </p:commandLink>
                     </span>
                 </div>
                 <div id="divMenu">
                     <p:megaMenu style="width: 60%">
                         <p:menuitem value="Principal" outcome="/principal" icon="ui-icon-home" />
+                        <p:menuitem value="CFDIs Recibidos" action="#{mbAcceso.irCDFIs}" icon="ui-icon-document" />
+                        <p:menuitem value="Configuración" action="#{mbAcceso.irConfiguracion()}" icon="ui-icon-wrench" />
                         <p:submenu label="Usuario" icon="ui-icon-person">
                             <p:column>
                                 <p:submenu>
@@ -44,19 +64,19 @@
                     </p:megaMenu> 
                 </div>
             </h:form>
-            
-            <h:form id="frmLogout">
-                    <p:confirmDialog id="confirmDialog" message="¿Deseas salir de la pagina?" header="Cerrar Sesión"
-                                     severity="alert" widgetVar="dialogLogout" showEffect="fade" hideEffect="fade" closable="false">
-                        <h:panelGrid columns="3" cellspacing="5" >
-                            <p:commandButton id="decline" value="Cancelar" onclick="dialogSalir.hide()" icon="ui-icon-close"/>
-                            <p:panel style="visibility: hidden"/>
-                            <p:commandButton id="confirm" value="Aceptar" update="" oncomplete="dialogSalir.hide()" action="#{mbAcceso.logout()}" icon="ui-icon-check"/>                        
-                        </h:panelGrid>
 
-                    </p:confirmDialog>
-                </h:form>
-            
+            <h:form id="frmLogout">
+                <p:confirmDialog id="confirmDialog" message="¿Deseas salir de la aplicación?" header="Cerrar Sesión"
+                                 severity="alert" widgetVar="dialogLogout" showEffect="fade" hideEffect="fade" closable="false">
+                    <h:panelGrid columns="3" cellspacing="5" >
+                        <p:commandButton id="decline" value="Cancelar" onclick="dialogSalir.hide()" icon="ui-icon-close"/>
+                        <p:panel style="visibility: hidden"/>
+                        <p:commandButton id="confirm" value="Aceptar" update="" oncomplete="dialogSalir.hide()" action="#{mbAcceso.logout()}" icon="ui-icon-check"/>                        
+                    </h:panelGrid>
+
+                </p:confirmDialog>
+            </h:form>
+
             <ui:insert name="top">Top</ui:insert>
         </div>
         <div>
