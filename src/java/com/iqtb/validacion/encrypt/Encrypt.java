@@ -1,8 +1,11 @@
 package com.iqtb.validacion.encrypt;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import net.sourceforge.lightcrypto.CryptoException;
+import net.sourceforge.lightcrypto.PBECrypt;
 import org.apache.commons.codec.binary.Base64;
 
 /**
@@ -57,9 +60,41 @@ public class Encrypt {
         return contrasenia;
     }
     
-//    public static void main(String[] args) {
-//        String a = getContraseniaAleatoria(8);
-//        System.out.println("Contraseña: "+a);
+    public static String encodeBase64(String str){
+        
+        return Base64.encodeBase64String(str.getBytes());
+        
+    }
+    
+    public static String decodeBase64(String str){
+        byte[] decode = Base64.decodeBase64(str);
+        return new String(decode);
+    }
+    
+    public static String encrypt(String str) throws CryptoException, IOException{
+        StringBuffer contrades = new StringBuffer(str); 
+            StringBuffer encryptado = PBECrypt.encrypt(contrades, new StringBuffer("password"));
+        
+        return encryptado.toString();
+    }
+    
+    public static String decrypt(String pass) throws CryptoException, IOException{          
+            StringBuffer contrades;  
+            
+            contrades = PBECrypt.decrypt(new StringBuffer(pass.replace("%2B", "+")),new StringBuffer("password"));
+            return contrades.toString();
+    }
+    
+    
+//    public static void main(String[] args) throws CryptoException, IOException {
+//        String a = encodeBase64("Holacorreoelectronico@gamil.com587micontraseñaesesta");
+//        System.out.println("encode: "+a);
+//        String b = decodeBase64(a);
+//        System.out.println("decode "+b);
+//        String c = encrypt("adminPass");
+//        System.out.println("encryp "+c);
+//        String d = decrypt(c);
+//        System.out.println("decrytp "+d);
 //    }
 
 }

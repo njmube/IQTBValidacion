@@ -16,5 +16,6 @@ import java.util.List;
 public interface InterfaceCfdisRecibidos {
     
     public List<CfdisRecibidos> getCfdisByidEmpresa(int idEmpresa) throws Exception;
+    public CfdisRecibidos getCfdiByID(int idCfdi) throws Exception;
     public boolean delete(CfdisRecibidos cfdi) throws Exception;
 }

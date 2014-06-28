@@ -28,135 +28,225 @@
                 </p:dialog>
                 <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
 
-                <h:form>
+
+
+                
+
                     <p:tabView>
                         <p:tab title="Empresa">
-                            <h:form id="frmEmpresa">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                    <h:panelGrid id="panelEmpresa" columns="2">
-                                        <p:outputLabel value="Nombre:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.nombre}" />
-                                        <p:outputLabel value="RFC:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.rfc}" />
-                                        <p:outputLabel value="Calle:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.calle}" />
-                                        <p:outputLabel value="Número interior:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.numInterior}" />
-                                        <p:outputLabel value="Número exterior:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.numExterior}" />
-                                        <p:outputLabel value="Colonia:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.colonia}" />
-                                        <p:outputLabel value="Localidad:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.localidad}" />
-                                        <p:outputLabel value="Referencia:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.referencia}" />
-                                        <p:outputLabel value="Municipio / Delegación:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.municipio}" />
-                                        <p:outputLabel value="Estado:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.estado}" />
-                                        <p:outputLabel value="País:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.pais}" />
-                                        <p:outputLabel value="Código Postal:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.cp}" />
-                                        <p:outputLabel value="Régimen fiscal:" />
-                                        <p:outputLabel value="#{mbConfiguracion.empresa.curp}" />
-                                        <p></p>
-                                        <p:outputLabel/>
-                                        <p:outputLabel/>
-                                        <p:commandButton id="btnModificarEmpresa" value="Modificar" onclick="PF('dialogModificarEmpresa').show();" icon="ui-icon-pencil" styleClass="boton" update="frmEmpresa"/>
-                                    </h:panelGrid>
+                            <!--                            <h:form id="frmEmpresa">
+                                                            <h:panelGrid columns="2" cellpadding="10">
+                                                                <h:panelGrid id="panelEmpresa" columns="2">
+                                                                    <p:outputLabel value="Nombre:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.nombre}" />
+                                                                    <p:outputLabel value="RFC:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.rfc}" />
+                                                                    <p:outputLabel value="Calle:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.calle}" />
+                                                                    <p:outputLabel value="Número interior:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.numInterior}" />
+                                                                    <p:outputLabel value="Número exterior:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.numExterior}" />
+                                                                    <p:outputLabel value="Colonia:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.colonia}" />
+                                                                    <p:outputLabel value="Localidad:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.localidad}" />
+                                                                    <p:outputLabel value="Referencia:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.referencia}" />
+                                                                    <p:outputLabel value="Municipio / Delegación:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.municipio}" />
+                                                                    <p:outputLabel value="Estado:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.estado}" />
+                                                                    <p:outputLabel value="País:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.pais}" />
+                                                                    <p:outputLabel value="Código Postal:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.cp}" />
+                                                                    <p:outputLabel value="Régimen fiscal:" />
+                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.regimenFiscal}" />
+                                                                    <p></p>
+                                                                    <p:outputLabel/>
+                                                                    <p:outputLabel/>
+                                                                    <p:commandButton id="btnModificarEmpresa" value="Modificar" onclick="PF('dialogModificarEmpresa').show();" icon="ui-icon-pencil" styleClass="boton" update="frmEmpresa"/>
+                                                                </h:panelGrid>
+                                                            </h:panelGrid>
+                                                            <p:dialog header="#{mbConfiguracion.empresa.nombre}" widgetVar="dialogModificarEmpresa" modal="true" resizable="fasle">
+                                                                <p:messages autoUpdate="true" showDetail="true" />
+                                                                <h:panelGrid id="displayUpdate" columns="2">
+                                                                    <p:outputLabel for="txtNombre" value="Nombre:" />
+                                                                    <p:inputText id="txtNombre" label="Nombre" value="#{mbConfiguracion.empresa.nombre}" size="50">
+                                                                        <f:validator validatorId="validarVacio"/>
+                                                                    </p:inputText>
+                            
+                                                                    <p:outputLabel for="txtRFC" value="RFC:" />
+                                                                    <p:inputText id="txtRFC" label="RFC" value="#{mbConfiguracion.empresa.rfc}" size="50" readonly="true"/>
+                            
+                                                                    <p:outputLabel for="txtCalle" value="Calle:" />
+                                                                    <p:inputText id="txtCalle" label="Calle" value="#{mbConfiguracion.empresa.calle}" size="50">
+                                                                        <f:validator validatorId="validarVacio"/>
+                                                                    </p:inputText>
+                            
+                                                                    <p:outputLabel for="txtNoInterior" value="Número interior:" />
+                                                                    <p:inputText id="txtNoInterior" label="Número Interior" value="#{mbConfiguracion.empresa.numInterior}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtNoExterior" value="Número exterior:" />
+                                                                    <p:inputText id="txtNoExterior" label="Número Exterior" value="#{mbConfiguracion.empresa.numExterior}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtColonia" value="Colonia:" />
+                                                                    <p:inputText id="txtColonia" label="Colonia" value="#{mbConfiguracion.empresa.colonia}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtLocalidad" value="Localidad:" />
+                                                                    <p:inputText id="txtLocalidad" label="Localidad" value="#{mbConfiguracion.empresa.localidad}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtReferencia" value="Referencia:" />
+                                                                    <p:inputText id="txtReferencia" label="Referencia" value="#{mbConfiguracion.empresa.referencia}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtMunicipio" value="Municipio / Delegación:" />
+                                                                    <p:inputText id="txtMunicipio" label="Municipio" value="#{mbConfiguracion.empresa.municipio}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtEstado" value="Estado:" />
+                                                                    <p:inputText id="txtEstado" label="Estado" value="#{mbConfiguracion.empresa.estado}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtPais" value="País:" />
+                                                                    <p:inputText id="txtPais" label="País"  value="#{mbConfiguracion.empresa.pais}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtCP" value="Código Postal:" />
+                                                                    <p:inputText id="txtCP" label="Código Postal" value="#{mbConfiguracion.empresa.cp}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtGNL" value="Código GNL:" />
+                                                                    <p:inputText id="txtGNL" label="Código GNL" value="#{mbConfiguracion.empresa.codigogln}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtEmail" value="Correo Electrónico:" />
+                                                                    <p:inputText id="txtEmail" label="Correo Electrónico" value="#{mbConfiguracion.empresa.email}" size="50" validator="validarEmail"/>
+                            
+                                                                    <p:outputLabel for="txtTelefono" value="Teléfono:" />
+                                                                    <p:inputText id="txtTelefono" label="Teléfono" value="#{mbConfiguracion.empresa.telefono}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtCURP" value="CURP:" />
+                                                                    <p:inputText id="txtCURP" label="CURP" value="#{mbConfiguracion.empresa.curp}" size="50"/>
+                            
+                                                                    <p:outputLabel for="txtRegimen" value="Régimen fiscal:" />
+                                                                    <p:inputText id="txtRegimen" label="Regimen" value="#{mbConfiguracion.empresa.regimenFiscal}" size="50"/>
+                            
+                                                                    <p:outputLabel/>
+                                                                    <p:outputLabel/>
+                                                                    <h:panelGrid columns="4" cellspacing="5">
+                                                                        <p:panel style="visibility: hidden"/>
+                                                                        <p:commandButton id="btnCAncelarEmpresa" value="Cancelar" onclick="dialogModificarEmpresa.hide()" icon="ui-icon-close" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
+                                                                        <p:panel style="visibility: hidden"/>
+                                                                        <p:commandButton id="btnGuardarEmpresa" value="Guardar" actionListener="#{mbConfiguracion.updateConfig()}" oncomplete="validaUpdateEmpresa(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
+                                                                    </h:panelGrid>
+                                                                </h:panelGrid>
+                            
+                                                                <script type="text/javascript">
+                                                                    function validaUpdateEmpresa(xhr, status, args) {
+                                                                        if (!args.actualiza) {
+                                                                            dialogModificarEmpresa.jq.effect("shake", {times: 5}, 500);
+                                                                        }
+                                                                        else {
+                                                                            dialogModificarEmpresa.hide();
+                                                                        }
+                                                                    }
+                                                                </script>
+                                                            </p:dialog>
+                                                        </h:form>-->
+                        </p:tab>
+                        <p:tab title="Notificaciones">
+
+                            <h:form id="jsfForm1">
+                                <h3>Get value from selectBooleanCheckbox field</h3>
+                                <h:selectBooleanCheckbox value="Remember Me" id="chkRememberMe" />
+                                <h:commandButton value="Show Checked" onclick="showCheckedValue()" />
+                            </h:form>
+
+                            <script type="text/javascript">
+                                function showCheckedValue() {
+                                    alert(document.getElementById('jsfForm1:chkRememberMe').checked);
+                                }
+                            </script>
+
+                            <h:form>
+                                <p:growl id="msg" />
+
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                    <h:outputText value="Basic: " />
+                                    <p:selectBooleanCheckbox value="#{mbConfiguracion.value1}" />
+
+                                    <h:outputText value="Ajax: " />
+                                    <p:selectBooleanCheckbox value="#{mbConfiguracion.value2}">
+                                        <p:ajax update="msg" listener="#{mbConfiguracion.addMessage}" />
+                                    </p:selectBooleanCheckbox>
                                 </h:panelGrid>
-                                <p:dialog header="#{mbConfiguracion.empresa.nombre}" widgetVar="dialogModificarEmpresa" modal="true" resizable="fasle">
-                                    <h:panelGrid columns="2">
-                                        <p:outputLabel for="txtNombre" value="Nombre:" />
-                                        <p:inputText id="txtNombre" label="Nombre" value="#{mbConfiguracion.empresa.nombre}" size="50" required="true">
-                                            <f:validator validatorId="validarVacio" />
-                                        </p:inputText>
-                                        
-                                        <p:outputLabel for="txtRFC" value="RFC:" />
-                                        <p:inputText id="txtRFC" label="RFC" value="#{mbConfiguracion.empresa.rfc}" size="50" readonly="true"/>
-                                        
-                                        <p:outputLabel for="txtCalle" value="Calle:" />
-                                        <p:inputText id="txtCalle" label="Calle" value="#{mbConfiguracion.empresa.calle}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtNoInterior" value="Número interior:" />
-                                        <p:inputText id="txtNoInterior" label="Número Interior" value="#{mbConfiguracion.empresa.numInterior}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtNoExterior" value="Número exterior:" />
-                                        <p:inputText id="txtNoExterior" label="Número Exterior" value="#{mbConfiguracion.empresa.numExterior}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtColonia" value="Colonia:" />
-                                        <p:inputText id="txtColonia" label="Colonia" value="#{mbConfiguracion.empresa.colonia}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtLocalidad" value="Localidad:" />
-                                        <p:inputText id="txtLocalidad" label="Localidad" value="#{mbConfiguracion.empresa.localidad}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtReferencia" value="Referencia:" />
-                                        <p:inputText id="txtReferencia" label="Referencia" value="#{mbConfiguracion.empresa.referencia}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtMunicipio" value="Municipio / Delegación:" />
-                                        <p:inputText id="txtMunicipio" label="Municipio" value="#{mbConfiguracion.empresa.municipio}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtEstado" value="Estado:" />
-                                        <p:inputText id="txtEstado" label="Estado" value="#{mbConfiguracion.empresa.estado}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtPais" value="País:" />
-                                        <p:inputText id="txtPais" label="País"  value="#{mbConfiguracion.empresa.pais}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtCP" value="Código Postal:" />
-                                        <p:inputText id="txtCP" label="Código Postal" value="#{mbConfiguracion.empresa.cp}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtGNL" value="Código GNL:" />
-                                        <p:inputText id="txtGNL" label="Código GNL" value="#{mbConfiguracion.empresa.codigogln}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtEmail" value="Correo Electrónico:" />
-                                        <p:inputText id="txtEmail" label="Correo Electrónico" value="#{mbConfiguracion.empresa.email}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtTelefono" value="Teléfono:" />
-                                        <p:inputText id="txtTelefono" label="Teléfono" value="#{mbConfiguracion.empresa.telefono}" size="50"/>
-                                        
-                                        <p:outputLabel for="txtCURP" value="CURP:" />
-                                        <p:inputText id="txtCURP" label="CURP" value="#{mbConfiguracion.empresa.curp}" size="50"/>
-                                        
-<!--                                        <p:outputLabel for="txtRegimen" value="Régimen fiscal:" />
-                                        <p:inputText id="txtRegimen" label="Régimen fiscal" value="{mbConfiguracion.empresa.curp}" size="50"/>-->
-                                        
-                                        <p:outputLabel/>
-                                        <h:panelGrid columns="4" cellspacing="5">
-                                            <p:panel style="visibility: hidden"/>
-                                            <p:commandButton id="btnCAncelarEmpresa" value="Cancelar" onclick="dialogModificarEmpresa.hide()" icon="ui-icon-close" styleClass="boton" update="frmEmpresa"/>
-                                            <p:panel style="visibility: hidden"/>
-                                            <p:commandButton id="btnGuardarEmpresa" value="Guardar" action="#{mbConfiguracion.updateEmpresa()}" oncomplete="dialogModificarEmpresa.hide()" icon="ui-icon-disk" styleClass="boton" update="frmEmpresa:panelEmpresa"/>
-                                        </h:panelGrid>
+
+                                <p:commandButton value="Submit" icon="ui-icon-check" update="display" oncomplete="PF('dlg').show()" />
+
+                                <p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                                    <h:panelGrid columns="1" id="display">
+                                        <h:outputText value="Value 1: #{mbConfiguracion.value1}" />
+                                        <h:outputText value="Value 2: #{mbConfiguracion.value2}" />
                                     </h:panelGrid>
                                 </p:dialog>
                             </h:form>
-                        </p:tab>
-                        <p:tab title="Notificaciones">
-                            <h:panelGrid columns="3" cellpadding="10">
-                                <p:outputLabel/>
-                                <p:outputLabel/>
-                                <p:outputLabel/>
-                                <p:selectManyCheckbox id="basic" layout="grid" columns="1">
-                                    <f:selectItem itemLabel="Enviar notificación de XML válido al remitente." itemValue="Xbox One" />
-                                    <f:selectItem itemLabel="Enviar notificación de XML inválido al remitente." itemValue="PS+" />
-                                    <f:selectItem itemLabel="Enviar notificación de XML válido al correo registrado." itemValue="Wii U" />
-                                    <f:selectItem itemLabel="Enviar notificación de XML inválido al correo registrado." itemValue="Wii U" />
-                                </p:selectManyCheckbox>
-                                <p:outputLabel/>
-                                <p:outputLabel/>
-                                <p:outputLabel value="Lista de correos que reciben notificaciones (separados por coma):" style="width: 50%"/>
-                                <p:inputTextarea style="width: 100%"></p:inputTextarea>
-                                <p:commandButton id="btnModificarEmail" value="Modificar" icon="ui-icon-pencil" styleClass="boton"/>
-                                <p></p>
-                                <p></p>
-                                <p:outputLabel/>
-                                <p:outputLabel/>
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <p:commandButton id="btnCancelarNotificacion" value="Cancelar" icon="ui-icon-close" styleClass="boton"/>
-                                    <p:commandButton id="btnGuardarNotificacion" value="Guardar Configuración" icon="ui-icon-disk" styleClass="boton"/>
-                                </h:panelGrid>
-                            </h:panelGrid>
+
+                            <!--                            <h:form id="frmNotificacion">
+                                                            <h:panelGrid id="panelcheck" columns="2">
+                                                                <p></p>
+                                                                <p:outputLabel/>
+                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.validoRemitente}" />
+                                                                <p:outputLabel value="Enviar notificación de XML válido al remitente." />
+                            
+                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.invalidoRemitente}" />
+                                                                <p:outputLabel value="Enviar notificación de XML inválido al remitente." />
+                            
+                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.validoEmail}" />
+                                                                <p:outputLabel value="Enviar notificación de XML válido al correo registrado." />
+                            
+                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.invalidoEmail}" />
+                                                                <p:outputLabel value="Enviar notificación de XML inválido al correo registrado." />
+                                                                <p></p>
+                                                                <h:panelGrid columns="2" cellpadding="5">
+                                                                    <p:commandButton id="btnCancelarNotificacion" value="Cancelar" icon="ui-icon-close" styleClass="boton" update="frmNotificacion:panelcheck"/>
+                                                                    <p:commandButton id="btnGuardarNotificacion" value="Guardar Configuración" actionListener="#{mbConfiguracion.checkConfiguracionEmpresa()}" icon="ui-icon-disk" styleClass="boton" update="frmNotificacion:panelcheck"/>
+                                                                </h:panelGrid>
+                                                            </h:panelGrid>
+                            
+                                                            <h:panelGrid id="panelEmail" columns="1" cellpadding="10">
+                                                                <p></p>
+                                                                <p:outputLabel value="Lista de correos que reciben notificaciones (separados por coma):" style="width: 50%"/>
+                                                                <p:inputTextarea rows="5" cols="50" value="#{mbConfiguracion.valor}" readonly="true"></p:inputTextarea>
+                                                                <h:panelGrid columns="2" cellspacing="5">
+                                                                    <p:panel style="visibility: hidden"/>
+                                                                    <p:commandButton id="btnModificarEmail" value="Modificar" onclick="PF('dialogModificarEmail').show();" icon="ui-icon-pencil" styleClass="boton"/>
+                                                                </h:panelGrid>
+                                                            </h:panelGrid>
+                            
+                                                            <p:dialog header="Lista de correos que reciben notificaciones" widgetVar="dialogModificarEmail" modal="true" resizable="fasle">
+                            
+                                                                <h:panelGrid id="panelModEmail" columns="2" cellspacing="5">
+                                                                    <p:panel style="visibility: hidden"/>
+                                                                    <p:inputTextarea rows="5" cols="50" value="#{mbConfiguracion.valor}" readonly="true"></p:inputTextarea>
+                                                                    <p:outputLabel for="email" value="Correo Electrónico:" />
+                                                                    <p:inputText id="email" label="Correo Electrónico" value="#{mbConfiguracion.listaEmail.valor}" size="50"/>
+                                                                    <p:panel style="visibility: hidden"/>
+                                                                    <h:panelGrid columns="4" cellspacing="5">
+                                                                        <p:panel style="visibility: hidden"/>
+                                                                        <p:commandButton id="btnCancelarEmail" value="Terminar" onclick="dialogModificarEmail.hide()" update="frmNotificacion:panelEmail" icon="ui-icon-close" styleClass="boton"/>
+                                                                        <p:panel style="visibility: hidden"/>
+                                                                        <p:commandButton id="btnGuardarEmail" value="Guardar" action="#{mbConfiguracion.updateConfiguracionEmpresa()}" oncomplete="validaUpdateEmail(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmNotificacion:panelEmail, frmNotificacion:panelModEmail"/>
+                                                                    </h:panelGrid>
+                                                                </h:panelGrid>
+                            
+                                                                <script type="text/javascript">
+                                                                    function validaUpdateEmail(xhr, status, args) {
+                                                                        if (!args.actualiza) {
+                                                                            dialogModificarEmail.jq.effect("shake", {times: 5}, 500);
+                                                                        }
+                                                                        else {
+                                                                            dialogModificarEmail.hide();
+                                                                        }
+                                                                    }
+                                                                </script>
+                                                            </p:dialog>
+                                                        </h:form>-->
                         </p:tab>
                         <p:tab title="Plantilla">
                             <!--                            <h:form id="frmPlantillas">
@@ -237,50 +327,7 @@
                 </script>
             </h:form>-->
                         </p:tab>
-                        <p:tab title="Correo Electrónico">
-                            <p:panel id="panelSMTP" header="Configuración de SMTP" toggleable="true" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                    <h:panelGrid columns="2">
-                                        <h:outputText value="Email De:" />
-                                        <h:inputText />
-                                        <h:outputText value="Nombre:" />
-                                        <h:inputText />
-                                        <h:outputText value="Puerto:" />
-                                        <h:inputText />
-                                        <h:outputText value="Servidor:" />
-                                        <h:inputText />
-                                        <h:outputText value="Usa SSL:" />
-                                        <h:inputText />
-                                        <h:outputText value="Usuario:" />
-                                        <h:inputText />
-                                        <p></p>
-                                        <p:outputLabel/>
-                                        <p:outputLabel/>
-                                        <p:commandButton id="btnModificarSMTP" value="Modificar" icon="ui-icon-pencil" styleClass="boton"/>
-                                    </h:panelGrid>
-                                </h:panelGrid>
-                            </p:panel>
-
-                            <p:panel id="panelPOP" header="Configuración de POP3" toggleable="true" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="10">
-                                    <h:panelGrid columns="2">
-                                        <h:outputText value="Puerto:" />
-                                        <h:inputText />
-                                        <h:outputText value="Servidor:" />
-                                        <h:inputText />
-                                        <h:outputText value="Usa SSL:" />
-                                        <h:inputText />
-                                        <h:outputText value="Usuario:" />
-                                        <h:inputText />
-                                        <p></p>
-                                        <p:outputLabel/>
-                                        <p:outputLabel/>
-                                        <p:commandButton id="btnModificarPOP" value="Modificar" icon="ui-icon-pencil" styleClass="boton"/>
-                                    </h:panelGrid>
-                                </h:panelGrid>
-                            </p:panel>
-                        </p:tab>
-                    </p:tabView>
+                        
                 </h:form>
             </ui:define>
 

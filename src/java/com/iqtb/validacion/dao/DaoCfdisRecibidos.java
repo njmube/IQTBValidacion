@@ -68,4 +68,26 @@ public class DaoCfdisRecibidos implements InterfaceCfdisRecibidos {
         return del;
     }
 
+    @Override
+    public CfdisRecibidos getCfdiByID(int idCfdi) throws Exception {
+        CfdisRecibidos cfdi = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        
+        try {
+            String hql = "from CfdisRecibidos where idCfdiRecibido = :ID";
+            Query query = session.createQuery(hql);
+            query.setParameter("ID", idCfdi);
+            cfdi = (CfdisRecibidos) query.uniqueResult();
+        } catch (HibernateException he) {
+            session.getTransaction().rollback();
+        }finally{
+            tx.commit();
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return cfdi;
+    }
+
 }

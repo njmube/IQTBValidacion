@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
+// Generated 23-jun-2014 17:36:10 by Hibernate Tools 3.6.0
 
 
 
@@ -26,6 +26,7 @@ public class Empresas  implements java.io.Serializable {
      private String email;
      private String telefono;
      private String curp;
+     private String regimenFiscal;
 
     public Empresas() {
     }
@@ -36,7 +37,7 @@ public class Empresas  implements java.io.Serializable {
         this.rfc = rfc;
         this.calle = calle;
     }
-    public Empresas(String nombre, String rfc, String calle, String numExterior, String numInterior, String colonia, String localidad, String referencia, String municipio, String estado, String pais, String cp, String codigogln, String email, String telefono, String curp) {
+    public Empresas(String nombre, String rfc, String calle, String numExterior, String numInterior, String colonia, String localidad, String referencia, String municipio, String estado, String pais, String cp, String codigogln, String email, String telefono, String curp, String regimenFiscal) {
        this.nombre = nombre;
        this.rfc = rfc;
        this.calle = calle;
@@ -53,6 +54,7 @@ public class Empresas  implements java.io.Serializable {
        this.email = email;
        this.telefono = telefono;
        this.curp = curp;
+       this.regimenFiscal = regimenFiscal;
     }
    
     public Integer getIdEmpresa() {
@@ -173,6 +175,13 @@ public class Empresas  implements java.io.Serializable {
     
     public void setCurp(String curp) {
         this.curp = curp;
+    }
+    public String getRegimenFiscal() {
+        return this.regimenFiscal;
+    }
+    
+    public void setRegimenFiscal(String regimenFiscal) {
+        this.regimenFiscal = regimenFiscal;
     }
 
 

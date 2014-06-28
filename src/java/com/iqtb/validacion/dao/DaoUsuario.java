@@ -45,22 +45,22 @@ public class DaoUsuario implements InterfaceUsuario {
 
     @Override
     public boolean updateUsuario(Usuarios usuario) throws Exception {
-        
+        boolean update = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tr = session.beginTransaction();
         
         try {
             session.saveOrUpdate(usuario);
-            return true;
+            update = true;
         } catch (HibernateException he) {
             session.getTransaction().rollback();
-            return false;
         }finally{
             tr.commit();
             if (session.isOpen()) {
                 session.close();
             }
         }
+        return update;
     }
 
     @Override

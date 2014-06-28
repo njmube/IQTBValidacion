@@ -42,16 +42,14 @@
                         <br/>
                         <p:outputLabel value="#{mbAcceso.empresaSeleccionada}" />
                         <p></p>
-                        <p:commandLink id="cambiarContrasenia" actionListener="/principal">
-                            <p:outputLabel value="Cambiar contraseña" />
-                        </p:commandLink>
+                        <h:link value="Cambiar contraseña" outcome="/Usuario/modificarPass?faces-redirect=true" />
                     </span>
                 </div>
                 <div id="divMenu">
                     <p:megaMenu style="width: 60%">
                         <p:menuitem value="Principal" outcome="/principal" icon="ui-icon-home" />
                         <p:menuitem value="CFDIs Recibidos" action="#{mbAcceso.irCDFIs}" icon="ui-icon-document" />
-                        <p:menuitem value="Configuración" action="#{mbAcceso.irConfiguracion()}" icon="ui-icon-wrench" />
+                        <p:menuitem value="Configuración" action="#{mbAcceso.irConfiguracionEmpresa()}" icon="ui-icon-wrench" />
                         <p:submenu label="Usuario" icon="ui-icon-person">
                             <p:column>
                                 <p:submenu>

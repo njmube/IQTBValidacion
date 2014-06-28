@@ -1,10 +1,10 @@
-.campo{
+/*.campo{
     font-weight: bold;
 }
 
 .insert {
     width: 220px;  
-}
+}*/
 
 .tituloTabla{
     font-size: x-large;
@@ -13,7 +13,7 @@
 
 .tabla{
     text-align: center;
-    font-weight: bolder;
+    /*font-weight: bolder;*/
     color: #D20005;
 }
 

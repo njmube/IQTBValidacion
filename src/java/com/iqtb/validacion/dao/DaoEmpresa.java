@@ -80,7 +80,7 @@ public class DaoEmpresa implements InterfaceEmpresa {
         Transaction tx = session.beginTransaction();
         
         try {
-            session.saveOrUpdate(empresa);
+            session.update(empresa);
             update = true;
         } catch (HibernateException he) {
             session.getTransaction().rollback();

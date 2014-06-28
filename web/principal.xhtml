@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -19,10 +22,23 @@
             <ui:define name="content">
                 <h3>Principal</h3>
                 <hr/>
+
+
+                <h:form id="jsfForm1">
+                    <h3>Get value from selectBooleanCheckbox field</h3>
+                    <h:selectBooleanCheckbox value="Remember Me" id="chkRememberMe" />
+                    <h:commandButton value="Show Checked" onclick="showCheckedValue()" />
+                </h:form>
+
+                <script type="text/javascript">
+                    function showCheckedValue() {
+                        alert(document.getElementById('jsfForm1:chkRememberMe').checked);
+                    }
+                </script>
+
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
 

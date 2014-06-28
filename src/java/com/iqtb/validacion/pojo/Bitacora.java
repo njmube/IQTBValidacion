@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 05-jun-2014 10:57:16 by Hibernate Tools 3.6.0
+// Generated 23-jun-2014 17:36:10 by Hibernate Tools 3.6.0
 
 
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Bitacora  implements java.io.Serializable {
      private Integer idBitacora;
      private Integer idUsuario;
      private int idServicio;
-     private int idEmpresa;
+     private Integer idEmpresa;
      private String descripcion;
      private Date fecha;
      private String tipo;
@@ -22,14 +22,13 @@ public class Bitacora  implements java.io.Serializable {
     }
 
 	
-    public Bitacora(int idServicio, int idEmpresa, String descripcion, Date fecha, String tipo) {
+    public Bitacora(int idServicio, String descripcion, Date fecha, String tipo) {
         this.idServicio = idServicio;
-        this.idEmpresa = idEmpresa;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.tipo = tipo;
     }
-    public Bitacora(Integer idUsuario, int idServicio, int idEmpresa, String descripcion, Date fecha, String tipo) {
+    public Bitacora(Integer idUsuario, int idServicio, Integer idEmpresa, String descripcion, Date fecha, String tipo) {
        this.idUsuario = idUsuario;
        this.idServicio = idServicio;
        this.idEmpresa = idEmpresa;
@@ -59,11 +58,11 @@ public class Bitacora  implements java.io.Serializable {
     public void setIdServicio(int idServicio) {
         this.idServicio = idServicio;
     }
-    public int getIdEmpresa() {
+    public Integer getIdEmpresa() {
         return this.idEmpresa;
     }
     
-    public void setIdEmpresa(int idEmpresa) {
+    public void setIdEmpresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
     public String getDescripcion() {

@@ -1,8 +1,8 @@
 #divSesionUsuario
 {
-    position: fixed;
-    right: 260px;
-    top: 25px;
+    position: relative;
+    right: 100px;
+    top: -60px;
     text-align: right;
 }
 
@@ -12,7 +12,7 @@
 }
 
 #divMenu{
-    margin-top: 25px;
+    margin-top: -52px;
     margin-left: 120px;
 }
 
@@ -29,7 +29,7 @@
     border: 1.5px solid #000000;
     padding: 10px;
     margin: 0 auto;
-    width: 1050px;
+    width: 1100px;
     /*text-align: center;*/
     height: 100px;
     position: relative;
@@ -52,8 +52,8 @@
     padding: 10px;
     margin: 1px auto;
     margin-top: 5px;
-    width: 1050px;
-    height: 600px;
+    width: 1100px;
+    height: 650px;
     position: relative;
     border-radius: 7px;
 }

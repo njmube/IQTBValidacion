@@ -57,4 +57,9 @@ public class MbUsuario implements Serializable{
     public void nuevaContrasenia(){
         
     }
+    
+//    public void hola() throws Exception{
+//        MbConfiguracion mbConfiguracion = new MbConfiguracion();
+//        mbConfiguracion.bitacora(idUsuario, idServicio, idEmpresa, user, user);
+//    }
 }

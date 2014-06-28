@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 05-jun-2014 10:57:17 by Hibernate Tools 3.6.0 -->
+<!-- Generated 23-jun-2014 17:36:13 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.iqtb.validacion.pojo.ConfiguracionesServicios" table="CONFIGURACIONES_SERVICIOS" catalog="iqtb">
         <id name="idConfiguracionServicio" type="java.lang.Integer">
@@ -15,10 +15,10 @@
             <column name="PROPIEDAD" length="45" not-null="true" />
         </property>
         <property name="valor" type="string">
-            <column name="VALOR" length="45" not-null="true" />
+            <column name="VALOR" length="512" not-null="true" />
         </property>
         <property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="45" not-null="true" />
+            <column name="DESCRIPCION" length="80" not-null="true" />
         </property>
         <property name="tipo" type="string">
             <column name="TIPO" length="8" not-null="true" />

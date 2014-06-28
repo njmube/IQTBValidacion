@@ -27,7 +27,7 @@
                           draggable="false" closable="false" resizable="false" style="font-size: small">  
                     <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
                 </p:dialog> 
-                <p:growl id="msnGeneral" showDetail="true" autoUpdate="true" sticky="false"/>
+                <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
 
                 <h:form id="frmCFDIs">
 
@@ -36,36 +36,43 @@
                                      selection="#{mbCfdisRecibidos.cfdisSeleccionados}" rowKey="#{item.idCfdiRecibido}" filteredValue="#{mbCfdisRecibidos.filtroCFDIs}"
                                      styleClass="tabla">
                             <f:facet name="header"><p:outputLabel value="Lista de CFDIs" style="font-size: large"/></f:facet>
-                            <p:column selectionMode="multiple" style="width:2%;" />
-                            <p:column headerText="Fecha Emisión" filterBy="fecha">
+                            <p:column selectionMode="multiple" style="width: 5"/>
+                            <p:column headerText="Fecha Emisión" filterBy="#{item.fecha}" sortBy="#{item.fecha}">
                                 <h:outputText value="#{item.fecha}"/>
                             </p:column>
-                            <p:column headerText="Serie/Folio" filterBy="serie">
-                                <h:outputText value="#{item.serie != null ? item.serie : 'Sin Serie'} / #{item.folio != null ? item.folio : 'Sin Folio'}"/>
+                            <p:column headerText="Serie" filterBy="#{item.serie}" sortBy="#{item.serie}">
+                                <h:outputText value="#{item.serie != null ? item.serie : 'Sin Serie'}"/>
                             </p:column>
-                            <p:column headerText="Fecha Recepción" filterBy="fechaRecepcion">
+                            <p:column headerText="Folio" filterBy="#{item.folio}" sortBy="#{item.folio}">
+                                <h:outputText value="#{item.folio != null ? item.folio : 'Sin Folio'}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Recepción" filterBy="#{item.fechaRecepcion}">
                                 <h:outputText value="#{item.fechaRecepcion}"/>
                             </p:column>
-                            <p:column headerText="RFC Socio comercial" filterBy="idSocioComercial">
-                                <h:outputText value="#{item.idSocioComercial}"/>
+                            <p:column headerText="RFC Socio comercial" sortBy="#{item.idSocioComercial}" >
+                                <h:outputText value="#{mbCfdisRecibidos.getSocioComercialByID(item.idSocioComercial)}"/>
                             </p:column>
-                            <p:column headerText="Monto Total">
-                                <h:outputText value="#{item.total}"/>
+                            <p:column headerText="Monto Total" sortBy="#{item.total}">
+                                <h:outputText value="#{item.total}">
+                                    <!--<f:convertNumber currencySymbol="$" type="currency"/>-->
+                                </h:outputText>
                             </p:column>
-                            <p:column headerText="Estado" filterBy="estado" style="width: 3%;">
+                            <p:column headerText="Estado" filterBy="#{item.estado}" sortBy="#{item.estado}" style="width: 5">
                                 <h:outputText value="#{item.estado}"/>
                             </p:column>
-                            <p:column headerText="Descargar" style="width: 5%;">
-                                <h:panelGrid columns="2" style="border-style: hidden; width: 5%;">
-                                    <p:commandLink id="downloadPDF" actionListener="/principal">
-                                        <p:graphicImage value="/resources/images/pdf.jpg" width="35" height="15"/>
-                                    </p:commandLink>
+                            <p:column headerText="Descargar">
+                                <h:panelGrid columns="2" style="border-style: hidden;">
 
-                                    <p:commandLink id="downloadXML" actionListener="/principal">
-                                        <p:graphicImage value="/resources/images/xml.jpg" width="35" height="15"/>
-                                    </p:commandLink>
+                                    <h:commandLink actionListener="#{mbCfdisRecibidos.downloadXML(item.idSocioComercial)}">
+                                        <p:graphicImage value="/resources/images/pdf.jpg" height="17" width="27"/>
+                                        <p:dataExporter type="pdf" target="tbl" fileName="pdf" />
+                                    </h:commandLink>
+
+                                    <h:commandLink actionListener="#{mbCfdisRecibidos.downloadXML(item.idSocioComercial)}">
+                                        <p:graphicImage value="/resources/images/xml.jpg" height="17" width="27"/>
+                                        <p:dataExporter type="xml" target="tbl" fileName="xml" />
+                                    </h:commandLink>
                                 </h:panelGrid>
-                                <!--<h:outputText value="{item.idEmpresa}"/>-->
                             </p:column>
                             <f:facet name="footer">
                                 <center>

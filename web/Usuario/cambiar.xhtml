@@ -11,7 +11,13 @@
         <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
     </h:head>
     <h:body>
-        <p:growl showDetail="true" life="5000" autoUpdate="true"/>
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="Cargando ..."   
+                  draggable="false" closable="false" resizable="false" style="font-size: small">  
+            <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
+        </p:dialog>
+        <p:growl showDetail="true" autoUpdate="true" sticky="fasle"/>
 
         <section class="contenedorLogin">
             <h:form id="frmRestablecer" class="formulario">  
@@ -24,17 +30,27 @@
                 <p:outputLabel value="Introdusca una nueva contraseña" />
                 <!--<h3>Introdusca una nueva contraseña</h3>-->
                 <p></p>
-                <!--<p><h:inputText pt:placeholder="Usuario" value="{mbAcceso.user}" readonly="true"/></p>-->
-                <p><h:inputSecret pt:placeholder="Introdusca su nueva contraseña" value="#{mbAcceso.pass}" /></p>
-                <p><h:inputSecret pt:placeholder="Confirmar Contraseña" value="#{mbAcceso.confirmarPass}" /></p>
+                <p><h:inputSecret pt:placeholder="Introdusca su nueva contraseña" label="Contraseña" value="#{mbAcceso.pass}" /></p>
+                <p><h:inputSecret pt:placeholder="Confirmar Contraseña" label="Confirmar Contraseña" value="#{mbAcceso.confirmarPass}" /></p>
                 <section class="seccionBotones">
-                    <p:commandButton id="btn" value="Aceptar" action="#{mbAcceso.nuevaContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="confirmation.show()"/>
+                    <p:commandButton id="btn" value="Aceptar" actionListener="#{mbAcceso.nuevaContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="validaUpdatePass(xhr, status, args)"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
+                <script type="text/javascript">
+                    function validaUpdatePass(xhr, status, args) {
+                        if (!args.actualiza) {
+                            confirmation.hide();
+                        }
+                        else {
+                            confirmation.show();
+                        }
+                    }
+                </script>
+
                 <p:confirmDialog message="La contraseña ha sido modificada exitosamente" showEffect="fade" 
                                  header="Contraseña modificada" severity="info" widgetVar="confirmation" style="font-size: small;" closable="false">
-                    <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" icon="ui-icon-circle-check"/> </center>
-                </p:confirmDialog>  
+                    <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" update=":frmRestablecer" icon="ui-icon-circle-check"/> </center>
+                </p:confirmDialog> 
             </h:form>
         </section>
     </h:body>

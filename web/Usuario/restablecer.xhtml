@@ -11,7 +11,13 @@
         <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
     </h:head>
     <h:body>
-        <p:growl showDetail="true" life="5000" autoUpdate="true"/>
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="Cargando ..."   
+                  draggable="false" closable="false" resizable="false" style="font-size: small">  
+            <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
+        </p:dialog>
+        <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
 
         <section class="contenedorLogin">
             <h:form id="frmRestablecer" class="formulario">  
@@ -26,9 +32,19 @@
                 <p><h:inputText pt:placeholder="Introdusca Usuario para restablecer contraseña" value="#{mbAcceso.user}" /></p>
                 <section class="seccionBotones">
                     <p:commandButton id="btnAtras" value="Atras" action="#{mbAcceso.irLogin()}" styleClass="btnLogin" update="frmRestablecer"/>
-                    <p:commandButton id="btnRestablecer" value="Restablecer" action="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update="frmRestablecer" oncomplete="confirmation.show()"/>
+                    <p:commandButton id="btnRestablecer" value="Restablecer" actionListener="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="validaRestablecerPass(xhr, status, args)"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
+                <script type="text/javascript">
+                    function validaRestablecerPass(xhr, status, args) {
+                        if (!args.actualiza) {
+                            confirmation.hide();
+                        }
+                        else {
+                            confirmation.show();
+                        }
+                    }
+                </script>
                 <p:confirmDialog message="La contraseña se ha enviado al correo electrónico #{mbAcceso.usuarioContraseña.email}" showEffect="fade" 
                                  header="Contraseña restablecida" severity="info" widgetVar="confirmation" style="font-size: small;" closable="false">
                     <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" icon="ui-icon-circle-check"/> </center>

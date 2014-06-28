@@ -20,6 +20,7 @@
     <mapping resource="com/iqtb/validacion/pojo/SociosComerciales.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/RolesHasOpciones.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/Roles.hbm.xml"/>
+    <mapping resource="com/iqtb/validacion/pojo/Plantillas.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/Bitacora.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/Empresas.hbm.xml"/>
     <mapping resource="com/iqtb/validacion/pojo/Usuarios.hbm.xml"/>
