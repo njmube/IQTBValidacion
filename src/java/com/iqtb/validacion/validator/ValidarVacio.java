@@ -28,8 +28,6 @@ public class ValidarVacio implements Validator{
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         String label;
         String valor = (String)value;
-        System.out.println("ValidacionVacio "+valor);
-        System.out.println("ValidacionVacio "+valor.length());
         HtmlInputText htmlInputText = (HtmlInputText) component;
         
         if (htmlInputText.getLabel() == null || htmlInputText.getLabel().trim().equals("")) {
@@ -38,12 +36,11 @@ public class ValidarVacio implements Validator{
             label = htmlInputText.getLabel();
         }
         
-        System.out.println("label: "+label);
         if (valor == null || valor.trim().isEmpty()) {
-            System.out.println("ENTRO IF");
+//            System.out.println("ENTRO IF");
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", label + ": es un campo requerido."));
         }else{
-            System.out.println("ENTRO ELSE");
+//            System.out.println("ENTRO ELSE");
         }
         
     }

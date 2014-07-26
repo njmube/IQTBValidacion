@@ -9,6 +9,7 @@ package com.iqtb.validacion.dao;
 import com.iqtb.validacion.dto.HibernateUtil;
 import com.iqtb.validacion.interfaces.InterfaceBitacora;
 import com.iqtb.validacion.pojo.Bitacora;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,7 +19,7 @@ import org.hibernate.Transaction;
  * @author danielromero
  */
 public class DaoBitacora implements InterfaceBitacora{
-
+private Logger logger = Logger.getLogger(DaoBitacora.class);
     @Override
     public boolean registarBitacora(Bitacora bitacora) throws Exception {
         boolean registro = false;
@@ -29,6 +30,7 @@ public class DaoBitacora implements InterfaceBitacora{
             session.save(bitacora);
             registro = true;
         } catch (HibernateException he) {
+            logger.error("registarBitacora ERROR: "+he);
             session.getTransaction().rollback();
         }finally{
             tx.commit();

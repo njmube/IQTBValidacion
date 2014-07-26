@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 23-jun-2014 17:36:13 by Hibernate Tools 3.6.0 -->
+<!-- Generated 18-jul-2014 19:02:47 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.iqtb.validacion.pojo.CfdisRecibidos" table="CFDIS_RECIBIDOS" catalog="iqtb">
         <id name="idCfdiRecibido" type="java.lang.Integer">
@@ -43,6 +43,9 @@
         </property>
         <property name="reportado" type="java.lang.Byte">
             <column name="REPORTADO" />
+        </property>
+        <property name="estadoNotificacion" type="string">
+            <column name="ESTADO_NOTIFICACION" length="13" />
         </property>
     </class>
 </hibernate-mapping>

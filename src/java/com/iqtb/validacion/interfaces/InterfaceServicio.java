@@ -14,5 +14,6 @@ import com.iqtb.validacion.pojo.Servicios;
  */
 public interface InterfaceServicio {
     public Servicios getServicoByNombre(String nombre) throws Exception;
+    public boolean updateServicio(Servicios servicio) throws Exception;
     
 }

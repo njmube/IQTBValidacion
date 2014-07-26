@@ -8,18 +8,19 @@ package com.iqtb.validacion.servlet;
 
 import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.pojo.Usuarios;
-import java.sql.Timestamp;
-import java.util.Date;
+import static com.iqtb.validacion.util.DateTime.getTimestamp;
 import java.util.List;
 import java.util.TimerTask;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author danielromero
  */
 public class DaemonSession extends TimerTask implements ServletContextListener{
+    private static Logger logger = Logger.getLogger(DaemonSession.class);
     int cont;
 
     @Override
@@ -31,30 +32,26 @@ public class DaemonSession extends TimerTask implements ServletContextListener{
     public void contextInitialized(ServletContextEvent sce) {
         boolean update = false;
         List<Usuarios> listaUsuarios;
-        System.out.println("run "+cont);
         try {
             listaUsuarios = new DaoUsuario().getUsuariosAutenticados();
             if (!listaUsuarios.isEmpty()) {
                 for (Usuarios usuarios : listaUsuarios) {
-                    Date fReg = new Date();
-                    long fecha = fReg.getTime();
-                    Timestamp timestamp = new Timestamp(fecha);
-                    usuarios.setLastAction(timestamp);
+                    usuarios.setLastAction(getTimestamp());
                     usuarios.setEstado("ACTIVO");
                     update = new DaoUsuario().updateUsuario(usuarios);
                     
                     if (update) {
-                        System.out.println("DaemonSession Actualizo el estado de los usuarios AUTENTICADOS "+usuarios.getUserid());
+                        logger.info("DaemonSession Actualizo el estado de los usuarios AUTENTICADOS "+usuarios.getUserid());
                     }else{
-                        System.out.println("DaemonSession Error al actualizar el estado de los usuarios AUTENTICADOS "+usuarios.getUserid());
+                        logger.error("DaemonSession Error al actualizar el estado de los usuarios AUTENTICADOS "+usuarios.getUserid());
                     }
                 }
                 
             } else {
-                System.out.println("DaemonSession No existen Usuarios AUTENTICADOS");
+                logger.info("DaemonSession No existen Usuarios AUTENTICADOS");
             }
         } catch (Exception e) {
-            System.out.println("DaemonSession Error al obtener los usuarios AUTENTICADOS");
+            logger.error("DaemonSession Error al obtener los usuarios AUTENTICADOS "+e);
         }
         
         

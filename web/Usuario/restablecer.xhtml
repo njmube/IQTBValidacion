@@ -7,8 +7,8 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Acceso</title>
-        <link rel="stylesheet" href="/IQTBValidacion/resources/css/cssLogin.css"/>
-        <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="/Validacion/resources/css/cssLogin.css"/>
+        <link rel="shortcut icon" href="/Validacion/resources/images/favicon.ico" type="image/x-icon"/>
     </h:head>
     <h:body>
         <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
@@ -23,16 +23,16 @@
             <h:form id="frmRestablecer" class="formulario">  
                 <h:panelGrid columns="2" cellpadding="1" cellspacing="5">
                     <p:panel style="border-style: hidden; background: border-box " >
-                        <p:graphicImage value="/resources/images/iqtb.png" width="80px"/>  
+                        <p:graphicImage value="/resources/images/logo.png" width="80px"/>  
                     </p:panel>        
-                    <h2>IQTB Validación</h2>
+                    <h2>Validación</h2>
                 </h:panelGrid>
                 <!--<h3>Introcusca su Usuario para restablecer su contraseña</h3>-->
                 <p></p>
                 <p><h:inputText pt:placeholder="Introdusca Usuario para restablecer contraseña" value="#{mbAcceso.user}" /></p>
                 <section class="seccionBotones">
-                    <p:commandButton id="btnAtras" value="Atras" action="#{mbAcceso.irLogin()}" styleClass="btnLogin" update="frmRestablecer"/>
-                    <p:commandButton id="btnRestablecer" value="Restablecer" actionListener="#{mbAcceso.restablecerContrasenia()}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="validaRestablecerPass(xhr, status, args)"/>
+                    <p:commandButton id="btnAtras" value="Atras" action="#{mbAcceso.irLogin}" styleClass="btnLogin" update="frmRestablecer"/>
+                    <p:commandButton id="btnRestablecer" value="Restablecer" actionListener="#{mbAcceso.restablecerContrasenia}" styleClass="btnLogin" update=":frmRestablecer" oncomplete="validaRestablecerPass(xhr, status, args)"/>
                 </section>
                 <p:outputLabel value="VERSION: 0.1 " style="font-size: xx-small; color: #036fab; font-weight: bold"/>
                 <script type="text/javascript">
@@ -47,7 +47,7 @@
                 </script>
                 <p:confirmDialog message="La contraseña se ha enviado al correo electrónico #{mbAcceso.usuarioContraseña.email}" showEffect="fade" 
                                  header="Contraseña restablecida" severity="info" widgetVar="confirmation" style="font-size: small;" closable="false">
-                    <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin()}" icon="ui-icon-circle-check"/> </center>
+                    <center> <p:commandButton value="Aceptar" oncomplete="confirmation.hide()" action="#{mbAcceso.irLogin}" icon="ui-icon-circle-check"/> </center>
                 </p:confirmDialog>  
             </h:form>
         </section>

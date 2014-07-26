@@ -20,5 +20,6 @@ public interface InterfacePlantilla {
     public Plantillas getPlantillaById(int idPlantilla) throws Exception;
     public Plantillas getPlantillaByNombre(String nombre) throws Exception;
     public List<Plantillas> listaPlantillas() throws Exception;
+    public List<Plantillas> listaPlantillasByIdEmpresa(int idEmpresa) throws Exception;
     
 }

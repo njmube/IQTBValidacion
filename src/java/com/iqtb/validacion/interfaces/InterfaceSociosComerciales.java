@@ -16,5 +16,10 @@ import java.util.List;
 public interface InterfaceSociosComerciales {
     public SociosComerciales getSocioComercialByID(Integer idSocioComercial) throws Exception;
     public List<SociosComerciales> filtroSocioComercialByRFC(String rfc) throws Exception;
+    public List<SociosComerciales> getSociosComercialesByIdEmpresa(Integer idEmpresa) throws Exception;
+    public boolean insertSocioComercial(SociosComerciales socioComercial) throws Exception;
+    public boolean updateSocioComercial(SociosComerciales socioComercial) throws Exception;
+    public boolean deleteSocioComercial(SociosComerciales socioComercial) throws Exception;
+    public SociosComerciales getSocioComercialByIdEmpresaRFC(Integer idEmpresa, String rfc) throws Exception;
     
 }

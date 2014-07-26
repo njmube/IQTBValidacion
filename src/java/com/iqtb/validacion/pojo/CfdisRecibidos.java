@@ -1,5 +1,5 @@
 package com.iqtb.validacion.pojo;
-// Generated 23-jun-2014 17:36:10 by Hibernate Tools 3.6.0
+// Generated 18-jul-2014 19:02:45 by Hibernate Tools 3.6.0
 
 
 import java.math.BigDecimal;
@@ -24,6 +24,7 @@ public class CfdisRecibidos  implements java.io.Serializable {
      private String estado;
      private String error;
      private Byte reportado;
+     private String estadoNotificacion;
 
     public CfdisRecibidos() {
     }
@@ -39,7 +40,7 @@ public class CfdisRecibidos  implements java.io.Serializable {
         this.fechaRecepcion = fechaRecepcion;
         this.estado = estado;
     }
-    public CfdisRecibidos(int idSocioComercial, int idEmpresa, String serie, Integer folio, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado, String error, Byte reportado) {
+    public CfdisRecibidos(int idSocioComercial, int idEmpresa, String serie, Integer folio, String uuid, Date fecha, BigDecimal total, String xmlSat, Date fechaRecepcion, String estado, String error, Byte reportado, String estadoNotificacion) {
        this.idSocioComercial = idSocioComercial;
        this.idEmpresa = idEmpresa;
        this.serie = serie;
@@ -52,6 +53,7 @@ public class CfdisRecibidos  implements java.io.Serializable {
        this.estado = estado;
        this.error = error;
        this.reportado = reportado;
+       this.estadoNotificacion = estadoNotificacion;
     }
    
     public Integer getIdCfdiRecibido() {
@@ -144,6 +146,13 @@ public class CfdisRecibidos  implements java.io.Serializable {
     
     public void setReportado(Byte reportado) {
         this.reportado = reportado;
+    }
+    public String getEstadoNotificacion() {
+        return this.estadoNotificacion;
+    }
+    
+    public void setEstadoNotificacion(String estadoNotificacion) {
+        this.estadoNotificacion = estadoNotificacion;
     }
 
 

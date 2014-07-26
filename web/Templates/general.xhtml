@@ -11,8 +11,8 @@
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <h:outputStylesheet name="./css/cssEstilo.css"/>
-        <link rel="shortcut icon" href="/IQTBValidacion/resources/images/favicon.ico" type="image/x-icon"/>
-        <title>IQTB Validación</title>
+        <link rel="shortcut icon" href="/Validacion/resources/images/favicon.ico" type="image/x-icon"/>
+        <title>Validación</title>
     </h:head>
 
     <h:body>
@@ -20,7 +20,7 @@
         <h:form id="frmIdle">
             <p:idleMonitor timeout="1800000" onidle="dialogIdle.show()" />
             <p:confirmDialog id="dialog" header="Sesión caducada" message="La sesión ha caducado, por favor, pulse el siguiente botón para volver a aceder a la aplicación" widgetVar="dialogIdle" closable="false">
-                <center><p:commandButton id="btnTimeOut" value="Aceptar" action="#{mbAcceso.logout()}" oncomplete="dialogIdle.hide()"/></center>
+                <center><p:commandButton id="btnTimeOut" value="Aceptar" action="#{mbAcceso.logout}" oncomplete="dialogIdle.hide()"/></center>
             </p:confirmDialog>
         </h:form>
 
@@ -33,31 +33,52 @@
         <div id="top">
             <h:form>
                 <div id="logo">
-                    <p:graphicImage value="/resources/images/iqtb.png" width="110" height="110"/> 
+                    <p:graphicImage value="/resources/images/logo.png" width="110" height="110"/> 
                 </div>
-                <div id="divH1"><h1>IQTB Validación</h1></div>
+                <div id="divH1"><h1>Validación</h1></div>
                 <div id="divSesionUsuario">
                     <span>
                         <p:outputLabel value="#{mbAcceso.usuario.userid}" />
                         <br/>
-                        <p:outputLabel value="#{mbAcceso.empresaSeleccionada}" />
+                        <p:outputLabel value="#{mbAcceso.empresaSeleccionada}" rendered="#{mbAcceso.rolEmpresa}"/>
                         <p></p>
-                        <h:link value="Cambiar contraseña" outcome="/Usuario/modificarPass?faces-redirect=true" />
+                        <p:commandLink id="nonAjax" action="#{mbAcceso.irModificarPass}" ajax="false">
+                            <h:outputText value="Cambiar contraseña" />
+                        </p:commandLink>
                     </span>
                 </div>
                 <div id="divMenu">
                     <p:megaMenu style="width: 60%">
                         <p:menuitem value="Principal" outcome="/principal" icon="ui-icon-home" />
-                        <p:menuitem value="CFDIs Recibidos" action="#{mbAcceso.irCDFIs}" icon="ui-icon-document" />
-                        <p:menuitem value="Configuración" action="#{mbAcceso.irConfiguracionEmpresa()}" icon="ui-icon-wrench" />
-                        <p:submenu label="Usuario" icon="ui-icon-person">
+                        <p:menuitem value="CFDIs Recibidos" action="#{mbAcceso.irCDFIs}" icon="ui-icon-document" rendered="#{mbAcceso.rolEmpresa}"/>
+                        <p:submenu label="Configuración" icon="ui-icon-wrench" rendered="#{mbAcceso.rolEmpresa}">
                             <p:column>
-                                <p:submenu>
-                                    <p:menuitem value="Nuevo" outcome="/principal" icon="ui-icon-plusthick"/>
-                                    <p:menuitem value="Ver" outcome="/principal" icon="ui-icon-contact"/>
+                                <p:submenu >
+                                    <p:menuitem value="Empresa" action="#{mbAcceso.irConfiguracionEmpresa}" icon="ui-icon-star"/>
+                                    <p:menuitem value="Notificaciones" action="#{mbAcceso.irConfiguracionNotificaciones}" rendered="#{mbAcceso.configNotificaciones}" icon="ui-icon-comment"/>
+                                    <p:menuitem value="Plantilla" action="#{mbAcceso.irConfiguracionPlantilla}" icon="ui-icon-document"/>
+                                    <p:menuitem value="Correo Electrónico" action="#{mbAcceso.irConfiguracionEmail}" icon="ui-icon-mail-open"/>
+                                </p:submenu>
+                            </p:column>
+                        </p:submenu>
+                        <p:submenu label="Configuraciones" icon="ui-icon-wrench" rendered="#{mbAcceso.rolServidor}">
+                            <p:column>
+                                <p:submenu >
+                                    <p:menuitem value="Servicios" outcome="/Configuracion/configuracion?faces-redirect=true" icon="ui-icon-gear" />
+                                    <p:menuitem value="Servidor SMTP" outcome="/Configuracion/servicioSMTP?faces-redirect=true" icon="ui-icon-mail-closed"/>
                                 </p:submenu>
                             </p:column>   
                         </p:submenu>
+                        <p:menuitem value="Socios Comerciales" action="#{mbAcceso.irSociosComerciales}" icon="ui-icon-person" rendered="#{mbAcceso.rolEmpresa}"/>
+                        <p:submenu label="Usuarios" icon="ui-icon-person" rendered="#{mbAcceso.rolServidor}">
+                            <p:column>
+                                <p:submenu >
+                                    <p:menuitem value="Usuarios" outcome="/Usuario/usuarios?faces-redirect=true" icon="ui-icon-person" />
+                                    <p:menuitem value="Roles" outcome="/Usuario/roles?faces-redirect=true" icon="ui-icon-contact"/>
+                                </p:submenu>
+                            </p:column>   
+                        </p:submenu>
+                        <p:menuitem value="Empresas" outcome="/Empresa/empresas?faces-redirect=true" icon="ui-icon-star" rendered="#{mbAcceso.rolServidor}" />
                         <p:menuitem value="Salir"  oncomplete="dialogLogout.show()" icon="ui-icon-extlink"/>
                     </p:megaMenu> 
                 </div>
@@ -69,7 +90,7 @@
                     <h:panelGrid columns="3" cellspacing="5" >
                         <p:commandButton id="decline" value="Cancelar" onclick="dialogSalir.hide()" icon="ui-icon-close"/>
                         <p:panel style="visibility: hidden"/>
-                        <p:commandButton id="confirm" value="Aceptar" update="" oncomplete="dialogSalir.hide()" action="#{mbAcceso.logout()}" icon="ui-icon-check"/>                        
+                        <p:commandButton id="confirm" value="Aceptar" update="" oncomplete="dialogSalir.hide()" action="#{mbAcceso.logout}" icon="ui-icon-check"/>                        
                     </h:panelGrid>
 
                 </p:confirmDialog>

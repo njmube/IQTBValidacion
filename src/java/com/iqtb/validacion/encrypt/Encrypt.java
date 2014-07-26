@@ -7,6 +7,7 @@ import java.security.SecureRandom;
 import net.sourceforge.lightcrypto.CryptoException;
 import net.sourceforge.lightcrypto.PBECrypt;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -87,14 +88,14 @@ public class Encrypt {
     
     
 //    public static void main(String[] args) throws CryptoException, IOException {
-//        String a = encodeBase64("Holacorreoelectronico@gamil.com587micontraseñaesesta");
+//        String a = encodeBase64("smtp.gmail.com587");
 //        System.out.println("encode: "+a);
 //        String b = decodeBase64(a);
 //        System.out.println("decode "+b);
-//        String c = encrypt("adminPass");
+//        String c = encrypt("passpruebas");
 //        System.out.println("encryp "+c);
-//        String d = decrypt(c);
-//        System.out.println("decrytp "+d);
+//        String d = decrypt("VKlw0qSRt0RpKvZfpRKJrEh48vunr0AC");
+//        System.out.println("decrytp "+d+" length "+d.length());
 //    }
 
 }

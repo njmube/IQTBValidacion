@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 23-jun-2014 17:36:13 by Hibernate Tools 3.6.0 -->
+<!-- Generated 18-jul-2014 19:02:47 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.iqtb.validacion.pojo.Bitacora" table="BITACORA" catalog="iqtb">
         <id name="idBitacora" type="java.lang.Integer">
@@ -11,8 +11,8 @@
         <property name="idUsuario" type="java.lang.Integer">
             <column name="idUSUARIO" />
         </property>
-        <property name="idServicio" type="int">
-            <column name="idSERVICIO" not-null="true" />
+        <property name="idServicio" type="java.lang.Integer">
+            <column name="idSERVICIO" />
         </property>
         <property name="idEmpresa" type="java.lang.Integer">
             <column name="idEMPRESA" />

@@ -6,6 +6,7 @@
 
 package com.iqtb.validacion.interfaces;
 
+import com.iqtb.validacion.pojo.UsuariosHasEmpresas;
 import com.iqtb.validacion.pojo.UsuariosHasEmpresasId;
 import java.util.List;
 
@@ -15,5 +16,9 @@ import java.util.List;
  */
 public interface InterfaceUsuarioEmpresa {
     public List<UsuariosHasEmpresasId> getEmpresasByIdUsuario(Integer idUsuario) throws Exception;
+    public boolean insertUsuarioEmpresa(UsuariosHasEmpresas usuarioEmpresa) throws Exception;
+    public boolean deleteUsuarioEmpresa(UsuariosHasEmpresas usuarioEmpresa) throws Exception;
+    public boolean deleteByIdUsuario(int idUsuario) throws Exception;
+    public List<UsuariosHasEmpresas> listaUsuariosHasEmpresas() throws Exception;
     
 }

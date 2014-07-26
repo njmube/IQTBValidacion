@@ -13,4 +13,12 @@
         <validator-class>com.iqtb.validacion.validator.ValidarVacio</validator-class>
     </validator>
     
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
+            <renderer-class>com.iqtb.validacion.fileupload.FileUploadRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+    
 </faces-config>

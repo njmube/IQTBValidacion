@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://209.212.145.87:8080/WSLCO/WSLCO?wsdl" uri="wsdl/209.212.145.87_8080/WSLCO/WSLCO.wsdl"/>
+    <system systemId="http://209.212.145.87:8080/WSLCO/WSLCO?xsd=1" uri="wsdl/209.212.145.87_8080/WSLCO/WSLCO.xsd_1.xsd"/>
+</catalog>

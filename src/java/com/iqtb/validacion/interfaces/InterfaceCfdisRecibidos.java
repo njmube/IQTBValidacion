@@ -18,4 +18,7 @@ public interface InterfaceCfdisRecibidos {
     public List<CfdisRecibidos> getCfdisByidEmpresa(int idEmpresa) throws Exception;
     public CfdisRecibidos getCfdiByID(int idCfdi) throws Exception;
     public boolean delete(CfdisRecibidos cfdi) throws Exception;
+    public List<CfdisRecibidos> listaCfdisByIdEmpresaEstado(int idEmpresa, String estado) throws Exception;
+    public List<CfdisRecibidos> listaCfdisErrorByIdEmpresa(int idEmpresa) throws Exception;
+    public List<CfdisRecibidos> listaCfdisValidosByIdEmpresa(int idEmpresa) throws Exception;
 }

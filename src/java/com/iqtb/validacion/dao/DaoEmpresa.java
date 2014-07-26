@@ -11,6 +11,7 @@ import com.iqtb.validacion.pojo.Empresas;
 import com.iqtb.validacion.pojo.UsuariosHasEmpresasId;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,6 +22,8 @@ import org.hibernate.Transaction;
  * @author danielromero
  */
 public class DaoEmpresa implements InterfaceEmpresa {
+
+    private Logger logger = Logger.getLogger(DaoEmpresa.class);
 
     @Override
     public List<Empresas> getEmpresaById(Integer idUsuario) throws Exception {
@@ -37,11 +40,11 @@ public class DaoEmpresa implements InterfaceEmpresa {
                 query.setParameter("IDEMPRESA", usuariosHasEmpresasId.getIdEmpresa());
                 empresa = (Empresas) query.uniqueResult();
                 listaEmpresas.add(empresa);
-            } catch (HibernateException he) {
-                session.getTransaction().rollback();
-                throw he;
-            }finally{
                 tx.commit();
+            } catch (HibernateException he) {
+                logger.error("getEmpresaById ERROR: " + he);
+                session.getTransaction().rollback();
+            } finally {
                 if (session.isOpen()) {
                     session.close();
                 }
@@ -53,7 +56,7 @@ public class DaoEmpresa implements InterfaceEmpresa {
     @Override
     public Empresas getEmpresaByRFC(String rfc) throws Exception {
         Empresas empresa = null;
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         try {
@@ -61,11 +64,11 @@ public class DaoEmpresa implements InterfaceEmpresa {
             Query query = session.createQuery(hql);
             query.setParameter("RFC", rfc);
             empresa = (Empresas) query.uniqueResult();
-        } catch (HibernateException he) {
-            session.getTransaction().rollback();
-            throw he;
-        }finally{
             tx.commit();
+        } catch (HibernateException he) {
+            logger.error("getEmpresaByRFC ERROR: " + he);
+            session.getTransaction().rollback();
+        } finally {
             if (session.isOpen()) {
                 session.close();
             }
@@ -78,14 +81,15 @@ public class DaoEmpresa implements InterfaceEmpresa {
         boolean update = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        
+
         try {
-            session.update(empresa);
+            session.saveOrUpdate(empresa);
+            tx.commit();
             update = true;
         } catch (HibernateException he) {
+            logger.error("updateEmpresa ERROR: " + he);
             session.getTransaction().rollback();
-        }finally{
-            tx.commit();
+        } finally {
             if (session.isOpen()) {
                 session.close();
             }
@@ -93,4 +97,87 @@ public class DaoEmpresa implements InterfaceEmpresa {
         return update;
     }
 
+    @Override
+    public Empresas getEmpresaByidEmpresa(int idEmpresa) throws Exception {
+        Empresas empresa = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            String hql = "from Empresas where idEmpresa = :IDEMPRESA";
+            Query query = session.createQuery(hql);
+            query.setParameter("IDEMPRESA", idEmpresa);
+            empresa = (Empresas) query.uniqueResult();
+            tx.commit();
+        } catch (HibernateException he) {
+            logger.error("getEmpresaByidEmpresa ERROR: " + he);
+            session.getTransaction().rollback();
+        } finally {
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return empresa;
+    }
+
+    @Override
+    public List<Empresas> getEmpresas() throws Exception {
+        List<Empresas> listaEmpresas = new ArrayList<Empresas>();
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            String hql = "from Empresas";
+            Query query = session.createQuery(hql);
+            listaEmpresas = query.list();
+            tx.commit();
+        } catch (HibernateException he) {
+            logger.error("getEmpresas ERROR: " + he);
+            session.getTransaction().rollback();
+        } finally {
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return listaEmpresas;
+    }
+
+    public String obtenerRFC(int idEmpresa){
+        String rfc = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        try{
+            String hql = "SELECT rfc FROM Empresas where idEmpresa="+idEmpresa;
+            Query q = session.createQuery(hql);
+            rfc = (String) q.uniqueResult();
+            tx.commit();
+        }catch(HibernateException he){
+            logger.error("No se puede obtener el id del socio comercial");
+        }finally{
+            session.close(); 
+        }
+        return rfc;  
+    }
+
+    @Override
+    public boolean deleteEmpresa(Empresas empresa) throws Exception {
+        boolean delete = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            session.delete(empresa);
+            tx.commit();
+            delete = true;
+        } catch (HibernateException he) {
+            logger.error("deleteEmpresa ERROR: " + he);
+            session.getTransaction().rollback();
+        } finally {
+            if (session.isOpen()) {
+                session.close();
+            }
+        }
+        return delete;
+    }
+    
 }

@@ -28,307 +28,209 @@
                 </p:dialog>
                 <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
 
-
-
-                
-
-                    <p:tabView>
-                        <p:tab title="Empresa">
-                            <!--                            <h:form id="frmEmpresa">
-                                                            <h:panelGrid columns="2" cellpadding="10">
-                                                                <h:panelGrid id="panelEmpresa" columns="2">
-                                                                    <p:outputLabel value="Nombre:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.nombre}" />
-                                                                    <p:outputLabel value="RFC:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.rfc}" />
-                                                                    <p:outputLabel value="Calle:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.calle}" />
-                                                                    <p:outputLabel value="Número interior:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.numInterior}" />
-                                                                    <p:outputLabel value="Número exterior:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.numExterior}" />
-                                                                    <p:outputLabel value="Colonia:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.colonia}" />
-                                                                    <p:outputLabel value="Localidad:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.localidad}" />
-                                                                    <p:outputLabel value="Referencia:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.referencia}" />
-                                                                    <p:outputLabel value="Municipio / Delegación:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.municipio}" />
-                                                                    <p:outputLabel value="Estado:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.estado}" />
-                                                                    <p:outputLabel value="País:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.pais}" />
-                                                                    <p:outputLabel value="Código Postal:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.cp}" />
-                                                                    <p:outputLabel value="Régimen fiscal:" />
-                                                                    <p:outputLabel value="#{mbConfiguracion.empresa.regimenFiscal}" />
-                                                                    <p></p>
-                                                                    <p:outputLabel/>
-                                                                    <p:outputLabel/>
-                                                                    <p:commandButton id="btnModificarEmpresa" value="Modificar" onclick="PF('dialogModificarEmpresa').show();" icon="ui-icon-pencil" styleClass="boton" update="frmEmpresa"/>
-                                                                </h:panelGrid>
-                                                            </h:panelGrid>
-                                                            <p:dialog header="#{mbConfiguracion.empresa.nombre}" widgetVar="dialogModificarEmpresa" modal="true" resizable="fasle">
-                                                                <p:messages autoUpdate="true" showDetail="true" />
-                                                                <h:panelGrid id="displayUpdate" columns="2">
-                                                                    <p:outputLabel for="txtNombre" value="Nombre:" />
-                                                                    <p:inputText id="txtNombre" label="Nombre" value="#{mbConfiguracion.empresa.nombre}" size="50">
-                                                                        <f:validator validatorId="validarVacio"/>
-                                                                    </p:inputText>
-                            
-                                                                    <p:outputLabel for="txtRFC" value="RFC:" />
-                                                                    <p:inputText id="txtRFC" label="RFC" value="#{mbConfiguracion.empresa.rfc}" size="50" readonly="true"/>
-                            
-                                                                    <p:outputLabel for="txtCalle" value="Calle:" />
-                                                                    <p:inputText id="txtCalle" label="Calle" value="#{mbConfiguracion.empresa.calle}" size="50">
-                                                                        <f:validator validatorId="validarVacio"/>
-                                                                    </p:inputText>
-                            
-                                                                    <p:outputLabel for="txtNoInterior" value="Número interior:" />
-                                                                    <p:inputText id="txtNoInterior" label="Número Interior" value="#{mbConfiguracion.empresa.numInterior}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtNoExterior" value="Número exterior:" />
-                                                                    <p:inputText id="txtNoExterior" label="Número Exterior" value="#{mbConfiguracion.empresa.numExterior}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtColonia" value="Colonia:" />
-                                                                    <p:inputText id="txtColonia" label="Colonia" value="#{mbConfiguracion.empresa.colonia}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtLocalidad" value="Localidad:" />
-                                                                    <p:inputText id="txtLocalidad" label="Localidad" value="#{mbConfiguracion.empresa.localidad}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtReferencia" value="Referencia:" />
-                                                                    <p:inputText id="txtReferencia" label="Referencia" value="#{mbConfiguracion.empresa.referencia}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtMunicipio" value="Municipio / Delegación:" />
-                                                                    <p:inputText id="txtMunicipio" label="Municipio" value="#{mbConfiguracion.empresa.municipio}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtEstado" value="Estado:" />
-                                                                    <p:inputText id="txtEstado" label="Estado" value="#{mbConfiguracion.empresa.estado}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtPais" value="País:" />
-                                                                    <p:inputText id="txtPais" label="País"  value="#{mbConfiguracion.empresa.pais}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtCP" value="Código Postal:" />
-                                                                    <p:inputText id="txtCP" label="Código Postal" value="#{mbConfiguracion.empresa.cp}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtGNL" value="Código GNL:" />
-                                                                    <p:inputText id="txtGNL" label="Código GNL" value="#{mbConfiguracion.empresa.codigogln}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtEmail" value="Correo Electrónico:" />
-                                                                    <p:inputText id="txtEmail" label="Correo Electrónico" value="#{mbConfiguracion.empresa.email}" size="50" validator="validarEmail"/>
-                            
-                                                                    <p:outputLabel for="txtTelefono" value="Teléfono:" />
-                                                                    <p:inputText id="txtTelefono" label="Teléfono" value="#{mbConfiguracion.empresa.telefono}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtCURP" value="CURP:" />
-                                                                    <p:inputText id="txtCURP" label="CURP" value="#{mbConfiguracion.empresa.curp}" size="50"/>
-                            
-                                                                    <p:outputLabel for="txtRegimen" value="Régimen fiscal:" />
-                                                                    <p:inputText id="txtRegimen" label="Regimen" value="#{mbConfiguracion.empresa.regimenFiscal}" size="50"/>
-                            
-                                                                    <p:outputLabel/>
-                                                                    <p:outputLabel/>
-                                                                    <h:panelGrid columns="4" cellspacing="5">
-                                                                        <p:panel style="visibility: hidden"/>
-                                                                        <p:commandButton id="btnCAncelarEmpresa" value="Cancelar" onclick="dialogModificarEmpresa.hide()" icon="ui-icon-close" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
-                                                                        <p:panel style="visibility: hidden"/>
-                                                                        <p:commandButton id="btnGuardarEmpresa" value="Guardar" actionListener="#{mbConfiguracion.updateConfig()}" oncomplete="validaUpdateEmpresa(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
-                                                                    </h:panelGrid>
-                                                                </h:panelGrid>
-                            
-                                                                <script type="text/javascript">
-                                                                    function validaUpdateEmpresa(xhr, status, args) {
-                                                                        if (!args.actualiza) {
-                                                                            dialogModificarEmpresa.jq.effect("shake", {times: 5}, 500);
-                                                                        }
-                                                                        else {
-                                                                            dialogModificarEmpresa.hide();
-                                                                        }
-                                                                    }
-                                                                </script>
-                                                            </p:dialog>
-                                                        </h:form>-->
-                        </p:tab>
-                        <p:tab title="Notificaciones">
-
-                            <h:form id="jsfForm1">
-                                <h3>Get value from selectBooleanCheckbox field</h3>
-                                <h:selectBooleanCheckbox value="Remember Me" id="chkRememberMe" />
-                                <h:commandButton value="Show Checked" onclick="showCheckedValue()" />
-                            </h:form>
-
-                            <script type="text/javascript">
-                                function showCheckedValue() {
-                                    alert(document.getElementById('jsfForm1:chkRememberMe').checked);
-                                }
-                            </script>
-
-                            <h:form>
-                                <p:growl id="msg" />
-
-                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                                    <h:outputText value="Basic: " />
-                                    <p:selectBooleanCheckbox value="#{mbConfiguracion.value1}" />
-
-                                    <h:outputText value="Ajax: " />
-                                    <p:selectBooleanCheckbox value="#{mbConfiguracion.value2}">
-                                        <p:ajax update="msg" listener="#{mbConfiguracion.addMessage}" />
-                                    </p:selectBooleanCheckbox>
+                <p:panel header="Configuración de Servicios">
+                    <h:panelGrid columns="2">
+                        <h:form id="frmRe">
+                            <p:panel id="panelRe" header="Servicio de recepción" style="margin-bottom:20px; height: 185px">
+                                <h:panelGrid columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo:" />
+                                    <p:outputLabel value="#{mbConfiguracion.teRecepcion.valor} ms" />
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración:" />
+                                    <p:outputLabel value="#{mbConfiguracion.trcRecepcion.valor} ms" />
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <p:outputLabel />
+                                    <p:commandButton id="btnModificarRe" value="Modificar" onclick="PF('dialogModificarRecepcion').show();" update=":frmRe:displayRe" icon="ui-icon-pencil" rendered="#{mbAcceso.configServicios}"/>
                                 </h:panelGrid>
-
-                                <p:commandButton value="Submit" icon="ui-icon-check" update="display" oncomplete="PF('dlg').show()" />
-
-                                <p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
-                                    <h:panelGrid columns="1" id="display">
-                                        <h:outputText value="Value 1: #{mbConfiguracion.value1}" />
-                                        <h:outputText value="Value 2: #{mbConfiguracion.value2}" />
+                            </p:panel>
+                            <p:dialog header="Servicio de recepción" widgetVar="dialogModificarRecepcion" modal="true" resizable="fasle" >
+                                <h:panelGrid id="displayRe" columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.teRecepcion.valor}" label="Tiempo de espera entre cada ciclo" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.trcRecepcion.valor}" label="Tiempo de espera para recargar configuración" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <h:panelGrid columns="4" cellspacing="5">
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnCancelarRe" value="Cancelar" onclick="dialogModificarRecepcion.hide()" icon="ui-icon-close" styleClass="boton"/>
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnGuardarRe" value="Guardar" actionListener="#{mbConfiguracion.updateServRecepcion}" oncomplete="validaServRecepcion(xhr, status, args)" update=":frmRe:panelRe, :frmRe:displayRe" icon="ui-icon-disk" styleClass="boton"/>
                                     </h:panelGrid>
-                                </p:dialog>
-                            </h:form>
-
-                            <!--                            <h:form id="frmNotificacion">
-                                                            <h:panelGrid id="panelcheck" columns="2">
-                                                                <p></p>
-                                                                <p:outputLabel/>
-                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.validoRemitente}" />
-                                                                <p:outputLabel value="Enviar notificación de XML válido al remitente." />
-                            
-                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.invalidoRemitente}" />
-                                                                <p:outputLabel value="Enviar notificación de XML inválido al remitente." />
-                            
-                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.validoEmail}" />
-                                                                <p:outputLabel value="Enviar notificación de XML válido al correo registrado." />
-                            
-                                                                <p:selectBooleanCheckbox value="#{mbConfiguracion.invalidoEmail}" />
-                                                                <p:outputLabel value="Enviar notificación de XML inválido al correo registrado." />
-                                                                <p></p>
-                                                                <h:panelGrid columns="2" cellpadding="5">
-                                                                    <p:commandButton id="btnCancelarNotificacion" value="Cancelar" icon="ui-icon-close" styleClass="boton" update="frmNotificacion:panelcheck"/>
-                                                                    <p:commandButton id="btnGuardarNotificacion" value="Guardar Configuración" actionListener="#{mbConfiguracion.checkConfiguracionEmpresa()}" icon="ui-icon-disk" styleClass="boton" update="frmNotificacion:panelcheck"/>
-                                                                </h:panelGrid>
-                                                            </h:panelGrid>
-                            
-                                                            <h:panelGrid id="panelEmail" columns="1" cellpadding="10">
-                                                                <p></p>
-                                                                <p:outputLabel value="Lista de correos que reciben notificaciones (separados por coma):" style="width: 50%"/>
-                                                                <p:inputTextarea rows="5" cols="50" value="#{mbConfiguracion.valor}" readonly="true"></p:inputTextarea>
-                                                                <h:panelGrid columns="2" cellspacing="5">
-                                                                    <p:panel style="visibility: hidden"/>
-                                                                    <p:commandButton id="btnModificarEmail" value="Modificar" onclick="PF('dialogModificarEmail').show();" icon="ui-icon-pencil" styleClass="boton"/>
-                                                                </h:panelGrid>
-                                                            </h:panelGrid>
-                            
-                                                            <p:dialog header="Lista de correos que reciben notificaciones" widgetVar="dialogModificarEmail" modal="true" resizable="fasle">
-                            
-                                                                <h:panelGrid id="panelModEmail" columns="2" cellspacing="5">
-                                                                    <p:panel style="visibility: hidden"/>
-                                                                    <p:inputTextarea rows="5" cols="50" value="#{mbConfiguracion.valor}" readonly="true"></p:inputTextarea>
-                                                                    <p:outputLabel for="email" value="Correo Electrónico:" />
-                                                                    <p:inputText id="email" label="Correo Electrónico" value="#{mbConfiguracion.listaEmail.valor}" size="50"/>
-                                                                    <p:panel style="visibility: hidden"/>
-                                                                    <h:panelGrid columns="4" cellspacing="5">
-                                                                        <p:panel style="visibility: hidden"/>
-                                                                        <p:commandButton id="btnCancelarEmail" value="Terminar" onclick="dialogModificarEmail.hide()" update="frmNotificacion:panelEmail" icon="ui-icon-close" styleClass="boton"/>
-                                                                        <p:panel style="visibility: hidden"/>
-                                                                        <p:commandButton id="btnGuardarEmail" value="Guardar" action="#{mbConfiguracion.updateConfiguracionEmpresa()}" oncomplete="validaUpdateEmail(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmNotificacion:panelEmail, frmNotificacion:panelModEmail"/>
-                                                                    </h:panelGrid>
-                                                                </h:panelGrid>
-                            
-                                                                <script type="text/javascript">
-                                                                    function validaUpdateEmail(xhr, status, args) {
-                                                                        if (!args.actualiza) {
-                                                                            dialogModificarEmail.jq.effect("shake", {times: 5}, 500);
-                                                                        }
-                                                                        else {
-                                                                            dialogModificarEmail.hide();
-                                                                        }
-                                                                    }
-                                                                </script>
-                                                            </p:dialog>
-                                                        </h:form>-->
-                        </p:tab>
-                        <p:tab title="Plantilla">
-                            <!--                            <h:form id="frmPlantillas">
-                                                            <p:panel id="panelPlantillas" style="width: 75%; font-size: x-small; border-style: hidden; background: border-box">
-                                                                <p:dataTable id="tablaPlantillas" var="pla" paginator="true" rows="10" rowsPerPageTemplate="3,5,8,10" 
-                                                                             value="#{mbPlantillas.listaPlantillas}" rowKey="#{pla.idPlantilla}" selection="#{mbPlantillas.plantillasSelecciondas}" 
-                                                                             resizableColumns="true" styleClass="tabla">
-                                                                    <f:facet name="header">
-                                                                        <p:outputLabel value="Plantillas" styleClass="titulosTablas"/>
-                                                                    </f:facet>
-                            
-                                                                    <p:column selectionMode="multiple" style="width: 2%" />
-                            
-                                                                    <p:column headerText="Nombre" style="width: 21%;" filterBy="#{pla.nombre}">
-                            #{pla.nombre}
-                        </p:column>
-
-                        <p:column headerText="Ruta" style="width: 45%;">
-                            #{pla.ruta}
-                        </p:column>
-
-                        <p:column headerText="Suma-SHA1" style="width: 36%; ">
-                            #{pla.sha1}
-                        </p:column>
-
-                        <f:facet name="footer">
-                            <center>
-                                <h:panelGrid columns="4" cellpadding="10px" cellspacing="10px" style="border-style: hidden; width: 70%; text-align: center">
-                                    <p:commandButton id="btnInsertaPlantilla" value="Nueva" icon="ui-icon-plusthick" update=":frmPlantillas" 
-                                                     oncomplete="wizard.loadStep (wizard.cfg.steps [0], true);  dialogPlantillaCreate.show()" actionListener="#{mbPlantillas.limpiarPlantilla()}" styleClass="boton"/>
-                                    <p:commandButton id="btnVistaPlantilla" value="Ver" update=":frmPlantillas" 
-                                                     oncomplete="mostrarDialogVisualizar(xhr, status, args)" icon="ui-icon-search" actionListener="#{mbPlantillas.existeSeleccionPlantilla()}" styleClass="boton"/>
-                                    <p:commandButton id="btnActualizaPlantilla" value="Modificar" icon="ui-icon-pencil" update=":frmPlantillas" 
-                                                     oncomplete="mostrarDialogUpdate(xhr, status, args)" action="#{mbPlantillas.existeSeleccionPlantilla()}" actionListener="#{mbPlantillas.limpiarPlantilla()}" styleClass="boton"/>
-                                    <p:commandButton id="btnEliminaPlantilla" value="Eliminar" update=":frmPlantillas" 
-                                                     oncomplete="mostrarDialogDelete(xhr, status, args)" icon="ui-icon-trash" actionListener="#{mbPlantillas.existeSeleccionPlantilla()}" styleClass="boton">
-                                        <f:param name="nombreParametro" value="eliminar"/> 
-                                    </p:commandButton>
                                 </h:panelGrid>
-                            </center> 
-                        </f:facet>
-                    </p:dataTable>
+                                <script type="text/javascript">
+                                    function validaServRecepcion(xhr, status, args) {
+                                        if (!args.servicioRecepcion) {
+                                            dialogModificarRecepcion.jq.effect("shake", {times: 5}, 500);
+                                        } else {
+                                            dialogModificarRecepcion.hide();
+                                        }
+                                    }
+                                </script>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="frmVa">
+                            <p:panel id="panelVa" header="Servicio de validación" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo:" />
+                                    <p:outputLabel value="#{mbConfiguracion.teValidacion.valor} ms" />
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración:" />
+                                    <p:outputLabel value="#{mbConfiguracion.trcValidacion.valor} ms" />
+                                    <p:outputLabel value="Webservice para validar certificados:" />
+                                    <p:outputLabel value="#{mbConfiguracion.wsValidacion.valor}" />
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <p:outputLabel />
+                                    <p:commandButton id="btnModificarVa" value="Modificar" onclick="PF('dialogModificarValidacion').show();" update=":frmVa:displayVa" icon="ui-icon-pencil" rendered="#{mbAcceso.configServicios}"/>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:dialog header="Servicio de validación" widgetVar="dialogModificarValidacion" modal="true" resizable="fasle" >
+                                <h:panelGrid id="displayVa" columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.teValidacion.valor}" label="Tiempo de espera entre cada ciclo" size="35" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.trcValidacion.valor}" label="Tiempo de espera para recargar configuración" size="35" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Webservice para validar certificados:"/>
+                                    <p:inputText value="#{mbConfiguracion.wsValidacion.valor}" size="35" validator="validarVacio"/>
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <h:panelGrid columns="4" cellspacing="5">
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnCancelarVa" value="Cancelar" onclick="dialogModificarValidacion.hide()" icon="ui-icon-close" styleClass="boton"/>
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnGuardarva" value="Guardar" actionListener="#{mbConfiguracion.updateServValidacion}" oncomplete="validaServValidacion(xhr, status, args)" update=":frmVa:panelVa, :frmVa:displayVa" icon="ui-icon-disk" styleClass="boton"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <script type="text/javascript">
+                                    function validaServValidacion(xhr, status, args) {
+                                        if (!args.servicioValidacion) {
+                                            dialogModificarValidacion.jq.effect("shake", {times: 5}, 500);
+                                        } else {
+                                            dialogModificarValidacion.hide();
+                                        }
+                                    }
+                                </script>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="frmEn">
+                            <p:panel id="panelEn" header="Servicio de envío de notificaciones" style="margin-bottom:20px; height: 190px">
+                                <h:panelGrid columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo:" />
+                                    <p:outputLabel value="#{mbConfiguracion.teEnvio.valor} ms" />
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración:" />
+                                    <p:outputLabel value="#{mbConfiguracion.trcEnvio.valor} ms" />
+                                    <p:outputLabel value="Mínimo de documentos encolados para volver a encolar más:" />
+                                    <p:outputLabel value="#{mbConfiguracion.mdEnvio.valor}" />
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <p:outputLabel />
+                                    <p:commandButton id="btnModificarEn" value="Modificar" onclick="PF('dialogModificarEnvio').show();" update=":frmEn:displayEn" icon="ui-icon-pencil" rendered="#{mbAcceso.configServicios}"/>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:dialog header="Servicio de envío de notificaciones" widgetVar="dialogModificarEnvio" modal="true" resizable="fasle" >
+                                <h:panelGrid id="displayEn" columns="2" >
+                                    <p:outputLabel value="Tiempo de espera entre cada ciclo (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.teEnvio.valor}" label="Tiempo de espera entre cada ciclo" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Tiempo de espera para recargar configuración (milisegundos):" />
+                                    <p:inputText value="#{mbConfiguracion.trcEnvio.valor}" label="Tiempo de espera para recargar configuración" validator="validarVacio">
+                                        <f:validateLongRange minimum="1000" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Mínimo de documentos encolados para volver a encolar más:"/>
+                                    <p:inputText value="#{mbConfiguracion.mdEnvio.valor}" label="Mínimo de documentos encolados" validator="validarVacio">
+                                        <f:validateLongRange minimum="0" />
+                                    </p:inputText>
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <h:panelGrid columns="4" cellspacing="5">
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnCancelarEn" value="Cancelar" onclick="dialogModificarEnvio.hide()" icon="ui-icon-close" styleClass="boton"/>
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnGuardarEn" value="Guardar" actionListener="#{mbConfiguracion.updateServEnvio}" oncomplete="validaServEnvio(xhr, status, args)" update=":frmEn:panelEn, :frmEn:displayEn" icon="ui-icon-disk" styleClass="boton"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <script type="text/javascript">
+                                    function validaServEnvio(xhr, status, args) {
+                                        if (!args.servicioEnvio) {
+                                            dialogModificarEnvio.jq.effect("shake", {times: 5}, 500);
+                                        } else {
+                                            dialogModificarEnvio.hide();
+                                        }
+                                    }
+                                </script>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="frmAd">
+                            <p:panel id="panelAd" header="Cuentas de usuario" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" >
+                                    <p:outputLabel value="Días para expirar contraseña:" />
+                                    <p:outputLabel value="#{mbConfiguracion.expPass.valor}" />
+                                    <p:outputLabel value="Días de inactividad permitidos antes de deshabilitar una cuenta:" />
+                                    <p:outputLabel value="#{mbConfiguracion.inactividad.valor}" />
+                                    <p:outputLabel value="Longitud mínima de contraseñas:" />
+                                    <p:outputLabel value="#{mbConfiguracion.minPass.valor}" />
+                                    <p:outputLabel value="Número de intentos fallidos antes de bloquear la cuenta:" />
+                                    <p:outputLabel value="#{mbConfiguracion.minIntentos.valor}" />
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <p:outputLabel />
+                                    <p:commandButton id="btnModificarAd" value="Modificar" onclick="PF('dialogModificarAcceso').show();" update=":frmAd:displayAd" icon="ui-icon-pencil" rendered="#{mbAcceso.configServicios}"/>
+                                </h:panelGrid>
+                            </p:panel>
+                            <p:dialog header="Cuentas de usuario" widgetVar="dialogModificarAcceso" modal="true" resizable="fasle" >
+                                <h:panelGrid id="displayAd" columns="2" >
+                                    <p:outputLabel value="Días para expirar contraseña:" />
+                                    <p:inputText value="#{mbConfiguracion.expPass.valor}" label="Días para expirar contraseña" validator="validarVacio">
+                                        <f:validateLongRange minimum="1" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Días de inactividad permitidos antes de deshabilitar una cuenta:" />
+                                    <p:inputText value="#{mbConfiguracion.inactividad.valor}" label="Días de inactividad permitidos antes de deshabilitar una cuenta" validator="validarVacio">
+                                        <f:validateLongRange minimum="1" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Longitud mínima de contraseñas:"/>
+                                    <p:inputText value="#{mbConfiguracion.minPass.valor}" label="Longitud mínima de contraseñas" validator="validarVacio">
+                                        <f:validateLongRange minimum="4" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Número de intentos fallidos antes de bloquear la cuenta:"/>
+                                    <p:inputText value="#{mbConfiguracion.minIntentos.valor}" label="Longitud mínima de contraseñas" validator="validarVacio">
+                                        <f:validateLongRange minimum="1" />
+                                    </p:inputText>
+                                    <p></p>
+                                    <p:outputLabel />
+                                    <h:panelGrid columns="4" cellspacing="5">
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnCancelarAd" value="Cancelar" onclick="dialogModificarAcceso.hide()" icon="ui-icon-close" styleClass="boton"/>
+                                        <p:panel style="visibility: hidden"/>
+                                        <p:commandButton id="btnGuardarAd" value="Guardar" actionListener="#{mbConfiguracion.updateServAcceso}" oncomplete="validaServAcceso(xhr, status, args)" update=":frmAd:panelAd, :frmAd:displayAd" icon="ui-icon-disk" styleClass="boton"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <script type="text/javascript">
+                                    function validaServAcceso(xhr, status, args) {
+                                        if (!args.servicioAcceso) {
+                                            dialogModificarAcceso.jq.effect("shake", {times: 5}, 500);
+                                        } else {
+                                            dialogModificarAcceso.hide();
+                                        }
+                                    }
+                                </script>
+                            </p:dialog>
+                        </h:form>
+
+                    </h:panelGrid>
+
                 </p:panel>
-                <p:dialog header="Detalles de Plantilla" widgetVar="plantillaDialog" resizable="false"  
-                          width="460" showEffect="clip" hideEffect="clip" id="dialog" modal="true">  
-                    <h:panelGrid id="display" columns="2" cellpadding="4">  
-                        <h:outputText value="idPlantilla:" />  
-                        <h:outputText value="#{mbPlantillas.plantilla.idPlantilla}" style="font-weight:bold"/>  
-
-                        <h:outputText value="Nombre:" />  
-                        <h:outputText value="#{mbPlantillas.plantilla.nombre}" style="font-weight:bold"/>  
-
-                        <h:outputText value="Ruta:" />  
-                        <h:outputText value="#{mbPlantillas.plantilla.ruta}" style="font-weight:bold"/>  
-
-                        <h:outputText value="Suma-SHA1:" />  
-                        <h:outputText value="#{mbPlantillas.plantilla.sha1}" style="font-weight:bold"/>  
-                    </h:panelGrid>  
-                </p:dialog> 
-
-                <script type="text/javascript">
-                    function mostrarDialogVisualizar(xhr, status, args) {
-                        if (args.estadoPlantilla) {
-                            plantillaDialog.show();
-                        }
-                    }
-                    function mostrarDialogDelete(xhr, status, args) {
-                        if (args.estadoPlantilla) {
-                            dialogPlantillaDelete.show();
-                        }
-                    }
-                    function mostrarDialogUpdate(xhr, status, args) {
-                        if (args.estadoPlantilla) {
-                            wizardUpdatePlantilla.loadStep(wizardUpdatePlantilla.cfg.steps [0], true)
-                            dialogPlantillaUpdate.show();
-                        }
-                    }
-                </script>
-            </h:form>-->
-                        </p:tab>
-                        
-                </h:form>
             </ui:define>
 
         </ui:composition>

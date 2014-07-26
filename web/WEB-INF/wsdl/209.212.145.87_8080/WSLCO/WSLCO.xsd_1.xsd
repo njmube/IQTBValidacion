@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://ws.wslco.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.wslco.com/">
+
+<xs:element name="ObtenerCertificado" type="tns:ObtenerCertificado" />
+
+<xs:element name="ObtenerCertificadoPAC" type="tns:ObtenerCertificadoPAC" />
+
+<xs:element name="ObtenerCertificadoPACResponse" type="tns:ObtenerCertificadoPACResponse" />
+
+<xs:element name="ObtenerCertificadoResponse" type="tns:ObtenerCertificadoResponse" />
+
+<xs:complexType name="ObtenerCertificado">
+<xs:sequence>
+<xs:element name="noCertificado" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ObtenerCertificadoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:certificado" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="certificado">
+<xs:sequence>
+<xs:element name="estatuscertificado" type="xs:string" minOccurs="0" />
+<xs:element name="fechafinal" type="xs:dateTime" minOccurs="0" />
+<xs:element name="fechainicio" type="xs:dateTime" minOccurs="0" />
+<xs:element name="idCertificado" type="xs:long" />
+<xs:element name="noCertificado" type="xs:string" minOccurs="0" />
+<xs:element name="rfcContribuyente" type="xs:string" minOccurs="0" />
+<xs:element name="validezobligaciones" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ObtenerCertificadoPAC">
+<xs:sequence>
+<xs:element name="noCertificado" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ObtenerCertificadoPACResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:certificadopac" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="certificadopac">
+<xs:sequence>
+<xs:element name="certificadopac" type="xs:string" minOccurs="0" />
+<xs:element name="estatuscertificado" type="xs:string" minOccurs="0" />
+<xs:element name="fechafinal" type="xs:dateTime" minOccurs="0" />
+<xs:element name="fechainicio" type="xs:dateTime" minOccurs="0" />
+<xs:element name="noCertificado" type="xs:string" minOccurs="0" />
+<xs:element name="rfcSat" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

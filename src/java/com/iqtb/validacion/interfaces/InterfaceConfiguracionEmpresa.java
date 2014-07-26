@@ -15,6 +15,7 @@ import com.iqtb.validacion.pojo.ConfiguracionesEmpresas;
 public interface InterfaceConfiguracionEmpresa {
     public ConfiguracionesEmpresas getConfiguracionEmpresa(int idEmpresa, String propiedad) throws Exception;
     public boolean updateConfiguracionEmpresa(ConfiguracionesEmpresas configEmpresa) throws Exception;
+    public boolean insertConfiguracionEmpresa(ConfiguracionesEmpresas configEmpresa) throws Exception;
     
     
 }

@@ -17,7 +17,7 @@ public class Imagen implements Serializable{
     private String nombre;
     private String carpeta;
     private String ruta;
-    private String estado = "sin subir";
+    private String estado = "Sin seleccionar";
 
     public Imagen() {
     }

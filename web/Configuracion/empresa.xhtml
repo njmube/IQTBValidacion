@@ -27,25 +27,6 @@
                     <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
                 </p:dialog>
                 <p:growl showDetail="true" autoUpdate="true" sticky="false"/>
-                <h:form>
-                    <p:tabMenu id="menuConfiguracion" activeIndex="#{param.i}">
-                        <p:menuitem value="Empresa" action="/Configuracion/empresa?faces-redirect=true" icon="ui-icon-star">
-                            <f:param name="i" value="0" />
-                        </p:menuitem>
-                        <p:menuitem value="Notificaciones" outcome="/Configuracion/notificaciones?faces-redirect=true" icon="ui-icon-mail-open">
-                            <f:param name="i" value="1" />
-                        </p:menuitem>
-                        <p:menuitem value="Plantilla" outcome="/Configuracion/plantilla?faces-redirect=true" icon="ui-icon-document">
-                            <f:param name="i" value="2" />
-                        </p:menuitem>
-                        <p:menuitem value="Correo Electrónico" outcome="/Configuracion/email?faces-redirect=true" icon="ui-icon-wrench">
-                            <f:param name="i" value="3" />
-                        </p:menuitem>
-                        <p:menuitem value="Social" outcome="/principal" icon="ui-icon-person">
-                            <f:param name="i" value="4" />
-                        </p:menuitem>
-                    </p:tabMenu>
-                </h:form>
 
                 <h:form id="frmEmpresa">
                     <p:panel id="panelConfigEmpresa">
@@ -79,7 +60,7 @@
                             <p></p>
                             <p:outputLabel/>
                             <p:outputLabel/>
-                            <p:commandButton id="btnModificarEmpresa" value="Modificar" onclick="PF('dialogModificarEmpresa').show();" type="button" icon="ui-icon-pencil" styleClass="boton" update="frmEmpresa"/>
+                            <p:commandButton id="btnModificarEmpresa" value="Modificar" onclick="PF('dialogModificarEmpresa').show();" type="button" icon="ui-icon-pencil" styleClass="boton" update="frmEmpresa" rendered="#{mbAcceso.modificarEmpresa}"/>
                         </h:panelGrid>
                         <p:dialog header="#{mbConfiguracion.empresa.nombre}" widgetVar="dialogModificarEmpresa" modal="true" resizable="fasle">
                             <h:panelGrid id="displayUpdate" columns="2">
@@ -144,7 +125,7 @@
                                     <p:panel style="visibility: hidden"/>
                                     <p:commandButton id="btnCancelarEmpresa" value="Cancelar" onclick="dialogModificarEmpresa.hide()" icon="ui-icon-close" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
                                     <p:panel style="visibility: hidden"/>
-                                    <p:commandButton id="btnGuardarEmpresa" value="Guardar" actionListener="#{mbConfiguracion.updateEmpresa()}" oncomplete="validaUpdateEmpresa(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
+                                    <p:commandButton id="btnGuardarEmpresa" value="Guardar" actionListener="#{mbConfiguracion.updateEmpresa}" oncomplete="validaUpdateEmpresa(xhr, status, args)" icon="ui-icon-disk" styleClass="boton" update="frmEmpresa:panelEmpresa, frmEmpresa:displayUpdate"/>
                                 </h:panelGrid>
                             </h:panelGrid>
 

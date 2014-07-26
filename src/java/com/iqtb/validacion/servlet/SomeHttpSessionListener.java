@@ -8,10 +8,7 @@ package com.iqtb.validacion.servlet;
 
 import com.iqtb.validacion.dao.DaoUsuario;
 import com.iqtb.validacion.pojo.Usuarios;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static com.iqtb.validacion.util.DateTime.getTimestamp;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -32,17 +29,14 @@ public class SomeHttpSessionListener implements HttpSessionListener{
         Usuarios usuario = (Usuarios) se.getSession().getAttribute("usuario");
         
         if (usuario != null) {
-            Date fReg = new Date();
-            long fecha = fReg.getTime();
-            Timestamp timestamp = new Timestamp(fecha);
-            usuario.setLastAction(timestamp);
+            usuario.setLastAction(getTimestamp());
             usuario.setEstado("ACTIVO");
             
             
             try {
                 new DaoUsuario().updateUsuario(usuario);
             } catch (Exception e) {
-                Logger.getLogger(SomeHttpSessionListener.class.getName()).log(Level.SEVERE, null, e);
+                System.out.println("SomeHttpSessionListener - ERROR "+e);
             }
             
         }else{

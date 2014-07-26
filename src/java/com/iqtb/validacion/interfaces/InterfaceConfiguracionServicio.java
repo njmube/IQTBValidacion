@@ -7,6 +7,7 @@
 package com.iqtb.validacion.interfaces;
 
 import com.iqtb.validacion.pojo.ConfiguracionesServicios;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import com.iqtb.validacion.pojo.ConfiguracionesServicios;
  */
 public interface InterfaceConfiguracionServicio {
     public ConfiguracionesServicios getConfigServicioByIdServicioPropiedad(int idServicio, String propiedad) throws Exception;
+    public boolean updateConfigServicios(ConfiguracionesServicios configServicios) throws Exception;
+    public List<ConfiguracionesServicios> listaServiciosByIdServicio(Integer idServicio) throws Exception;
     
 }

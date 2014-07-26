@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.iqtb.validacion.util;
 
+import com.iqtb.validacion.pojo.Usuarios;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -30,13 +30,14 @@ import java.util.zip.ZipOutputStream;
 import javax.faces.context.FacesContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author danielromero
  */
 public class ManejoArchivos {
-    
+
     private File archivo;
     private FileReader archivoLector;
     private BufferedReader buferLector;
@@ -48,24 +49,24 @@ public class ManejoArchivos {
     private static String dirParent = null;
     private static Integer numero = null;
     private int BUFFER_SIZE = 8192;
-//    private Logger log = Logger.getLogger(ManejoArchivos.class);
-    
+    private Logger logger = Logger.getLogger(ManejoArchivos.class);
+
     public ManejoArchivos() {
     }
-    
-    public List<Imagen> ListaImagenes(String ruta) throws IOException{
+
+    public List<Imagen> ListaImagenes(String ruta) throws IOException {
         this.archivo = new File(ruta);
         List<String> listaIma = new ArrayList<String>();
-        
+
         try {
             archivoLector = new FileReader(this.archivo);
         } catch (FileNotFoundException e) {
             System.out.println(" - metodo_listaImagenes ManejoArchivos ] Error al leer al archivo: " + e.getMessage());
-//            this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_listaImagenes ManejoArchivos ] Error al leer al archivo: " + e.getMessage());
+            logger.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid()+ " - metodo_listaImagenes ManejoArchivos ] Error al leer al archivo: " + e.getMessage());
         }
         buferLector = new BufferedReader(archivoLector);
 
-        String nombreIma = ""; 
+        String nombreIma = "";
         String Carpeta = "";
         while (buferLector.ready()) {
             if (!(linea = buferLector.readLine()).equals("\000")) {
@@ -84,7 +85,7 @@ public class ManejoArchivos {
         buferLector.close();
         return listaImagen;
     }
-    
+
     //Metodo para borrar el contenido de un directorio
     public void borrarDirectorio(File directorio) {
         if (directorio.exists()) {
@@ -106,10 +107,10 @@ public class ManejoArchivos {
         boolean correcto = f1.renameTo(f2);
         if (correcto) {
             System.out.println("- metodo_renombrarArchivo ManejoArchivos ] Se renombro correcatmente el archivo" + f2.getName());
-//            this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_renombrarArchivo ManejoArchivos ] Se renombro correcatmente el archivo" + f2.getName());
+            logger.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid() + " - metodo_renombrarArchivo ManejoArchivos ] Se renombro correcatmente el archivo" + f2.getName());
         } else {
             System.out.println("\" - metodo_renombrarArchivo ManejoArchivos ] Se pudo renombrar correcatmente el archivo\"");
-//            this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_renombrarArchivo ManejoArchivos ] Se pudo renombrar correcatmente el archivo");
+            logger.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid() + " - metodo_renombrarArchivo ManejoArchivos ] Se pudo renombrar correcatmente el archivo");
         }
         return correcto;
     }
@@ -197,47 +198,49 @@ public class ManejoArchivos {
     public boolean compilarPlantilla(String rutaorigen) {
         Boolean ban = false;
         String nombre = nombreImagen(rutaorigen);
-        nombre = quirtarExtension(nombre);
-        File rutaCompilaciones = new File("/Users/danielromero/NetBeansProjects/IQTBValidacion/Plantillas/compilaciones/");
-        if (!rutaCompilaciones.isDirectory()) {
-            boolean bandera = rutaCompilaciones.mkdirs();
-            if (bandera) {
-                System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Se creo correctamente la ruta: " + rutaCompilaciones.getAbsolutePath());
-//                this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Se creo correctamente la ruta: " + rutaCompilaciones.getAbsolutePath());
-            } else {
-                System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] No se pudo crear la ruta: " + rutaCompilaciones.getAbsolutePath());
-//                this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] No se pudo crear la ruta: " + rutaCompilaciones.getAbsolutePath());
-            }
-        } else {
-            System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Ya existe la ruta compilacones: " + rutaCompilaciones);
-//            this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Ya existe la ruta compilacones: " + rutaCompilaciones);
-        }
+//        nombre = nombre.replace("xprint", "jasper");
+        nombre = quirtarExtension(rutaorigen);
+        
+//        File rutaCompilaciones = new File("/Users/danielromero/NetBeansProjects/IQTBValidacion/Plantillas/compilaciones/");
+//        if (!rutaCompilaciones.isDirectory()) {
+//            boolean bandera = rutaCompilaciones.mkdirs();
+//            if (bandera) {
+//                System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Se creo correctamente la ruta: " + rutaCompilaciones.getAbsolutePath());
+////                this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Se creo correctamente la ruta: " + rutaCompilaciones.getAbsolutePath());
+//            } else {
+//                System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] No se pudo crear la ruta: " + rutaCompilaciones.getAbsolutePath());
+////                this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] No se pudo crear la ruta: " + rutaCompilaciones.getAbsolutePath());
+//            }
+//        } else {
+//            System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Ya existe la ruta compilacones: " + rutaCompilaciones);
+////            this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Ya existe la ruta compilacones: " + rutaCompilaciones);
+//        }
 
-        File archivoCompilado = new File("/Users/danielromero/NetBeansProjects/iqtbValidacion/Plantillas/compilaciones/" + nombre + ".jasper");
+        File archivoCompilado = new File(nombre + ".jasper"); 
         System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] ruta del archivo compilado: " + archivoCompilado.getAbsolutePath());
-//        this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] ruta del archivo compilado: " + archivoCompilado.getAbsolutePath());
+        logger.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid() + " - metodo_compilarPlantilla ManejoArchivos ] ruta del archivo compilado: " + archivoCompilado.getAbsolutePath());
         try {
             JasperCompileManager.compileReportToFile(rutaorigen, archivoCompilado.getAbsolutePath());
             ban = true;
             if (ban) {
                 System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Se compilo correctamente la plantilla: " + archivoCompilado.getName());
 //                this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Se compilo correctamente la plantilla: " + archivoCompilado.getName());
-                boolean eliminaCompilacon = archivoCompilado.delete();
-                if (eliminaCompilacon) {
-                    System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Se elimino correctamente la plantilla compilada: " + archivoCompilado.getName());
-//                    this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Se elimino correctamente la plantilla compilada: " + archivoCompilado.getName());
-                } else {
-                    System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Noi se pudo eliminar correctamente la plantilla compilada: " + archivoCompilado.getName());
-//                    this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Noi se pudo eliminar correctamente la plantilla compilada: " + archivoCompilado.getName());
-                }
+//                boolean eliminaCompilacon = archivoCompilado.delete();
+//                if (eliminaCompilacon) {
+//                    System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Se elimino correctamente la plantilla compilada: " + archivoCompilado.getName());
+////                    this.log.info("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Se elimino correctamente la plantilla compilada: " + archivoCompilado.getName());
+//                } else {
+//                    System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Noi se pudo eliminar correctamente la plantilla compilada: " + archivoCompilado.getName());
+////                    this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Noi se pudo eliminar correctamente la plantilla compilada: " + archivoCompilado.getName());
+//                }
             } else {
                 System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] No se pudo llevar a cabo la compilacion de plantilla: " + archivoCompilado.getName());
-//                this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] No se pudo llevar a cabo la compilacion de plantilla: " + archivoCompilado.getName());
+                logger.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid() + " - metodo_compilarPlantilla ManejoArchivos ] No se pudo llevar a cabo la compilacion de plantilla: " + archivoCompilado.getName());
             }
             return ban;
         } catch (JRException ex) {
             System.out.println(" - metodo_compilarPlantilla ManejoArchivos ] Error de compilacion: " + ex.getMessage());
-//            this.log.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUsuario() + " - metodo_compilarPlantilla ManejoArchivos ] Error de compilacion: " + ex.getMessage());
+            logger.error("[ " + ((Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario")).getUserid() + " - metodo_compilarPlantilla ManejoArchivos ] Error de compilacion: " + ex.getMessage());
         }
         return ban;
     }
@@ -387,16 +390,16 @@ public class ManejoArchivos {
             try {
                 // extract file if not a directory
                 if (!entry.isDirectory()) {
-                    BufferedInputStream is =
-                            new BufferedInputStream(zipFile.getInputStream(entry));
+                    BufferedInputStream is
+                            = new BufferedInputStream(zipFile.getInputStream(entry));
                     int currentByte;
                     // establish buffer for writing file
                     byte data[] = new byte[BUFFER];
 
                     // write the current file to disk
                     FileOutputStream fos = new FileOutputStream(destFile);
-                    BufferedOutputStream dest =
-                            new BufferedOutputStream(fos, BUFFER);
+                    BufferedOutputStream dest
+                            = new BufferedOutputStream(fos, BUFFER);
 
                     // read and write until last byte is encountered
                     while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
@@ -513,5 +516,98 @@ public class ManejoArchivos {
         }
         return true;
     }
+
+    public boolean eliminar(String ruta) {
+        File archivo = new File(ruta);
+        if (archivo.exists()) {
+            if (archivo.isDirectory()) {
+                logger.info("Se eliminara el Contenido de la carpeta: " + ruta);
+                File[] archivos = archivo.listFiles();
+                for (int i = 0; i < archivos.length; i++) {
+                    File file = archivos[i];
+                    if (file.isDirectory()) {
+                        eliminar(file.getAbsolutePath());
+                    } else {
+                        if (file.delete()) {
+                            logger.info("Archivo: " + file.getAbsolutePath() + " eliminado Correctamente");
+                        } else {
+                            logger.error("Error al Eliminar el Archivo: " + file.getAbsolutePath());
+                        }
+                    }
+                }
+                if (archivo.delete()) {
+                    logger.info("Carpeta: " + ruta + " Eliminada");
+                } else {
+                    logger.error("Error al Eliminar la Carpeta: " + ruta);
+                }
+            } else {
+                logger.info("Se eliminara el Archivo: " + ruta);
+                if (archivo.delete()) {
+                    logger.info("Archivo: " + archivo.getAbsolutePath() + " eliminado Correctamente");
+                } else {
+                    logger.error("Error al Eliminar el Archivo: " + archivo.getAbsolutePath());
+                }
+            }
+        } else {
+            logger.warn("La carpeta "+ruta+" no existe.");
+        }
+        return true;
+    }
     
+    public void mover(String origen, String destino) {
+        File fileorigen = new File(origen);
+        if (fileorigen.exists()) {
+            logger.info("El Origen si existe");
+            if (fileorigen.isFile()) {
+                logger.info("El origen es un Archivo");
+                File filedestino = new File(destino);
+                if (!filedestino.exists()) {
+                    if (fileorigen.renameTo(filedestino)) {
+                        logger.info("Se movio Corectamente");
+                    } else {
+                        logger.error("No se pudo mover");
+                    }
+                } else {
+                    logger.error("Imposible mover Archivo, el destino "+filedestino.getAbsolutePath()+" ya existe");
+                }
+            } 
+            if(fileorigen.isDirectory()){
+                logger.info("El origen es una Carpeta");
+                File carpetadestino = new File(destino);
+                if(carpetadestino.mkdirs()){
+                    logger.info("Carpetas Destino Creadas");
+                }else{
+                    logger.error("Error al crear Carpetas destino");
+                }
+                if(!origen.endsWith("/")){
+                    origen = origen+"/";
+                }
+                if(!destino.endsWith("/")){
+                    destino = destino+"/";
+                }
+                File[] subs = fileorigen.listFiles();
+                for (int i = 0; i < subs.length; i++) {
+                    File file = subs[i];
+                    if(file.isFile()){
+                        logger.info("Archivo a mover: "+file.getAbsolutePath());
+                        
+                        mover(file.getAbsolutePath(), destino+file.getName());
+                    }
+                    if(file.isDirectory()){
+                        logger.info("Carpeta a mover: "+file.getName());
+                        mover(origen+file.getName(), destino+file.getName());
+                    }
+                }
+                if(fileorigen.delete()){
+                    logger.info("Carpeta: "+fileorigen.getAbsolutePath()+" eliminada");
+                }else{
+                    logger.error("Error al eliminar Carpeta: "+fileorigen.getAbsolutePath());
+                }
+            }
+        } else {
+            logger.warn("El origen "+origen+" no existe");
+        }
+    }
+
+
 }

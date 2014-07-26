@@ -20,21 +20,59 @@
             </ui:define>
 
             <ui:define name="content">
-                <h3>Principal</h3>
-                <hr/>
+                <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide()"/>  
 
+                <p:dialog modal="true" widgetVar="statusDialog" header="Cargando ..."   
+                          draggable="false" closable="false" resizable="false" style="font-size: small">  
+                    <center><p:graphicImage value="/resources/images/ajax-loader.gif" />  </center>
+                </p:dialog>
+                <p:growl showDetail="true" autoUpdate="true" sticky="fasle"/>
+                <br/>
+                <br/>
+                <center>
+                    <h1 style="color: black"><p:outputLabel value="Validación de CFDIs" /></h1>
+                    <br/>
+                    <h2><p:outputLabel value="Bienvenido" /></h2>
+                </center>
+                <p:separator />
+                <h:panelGrid columns="3" cellpadding="5" cellspacing="10" rendered="#{mbAcceso.rolEmpresa}">
+                    <p:outputLabel value="CFDIs" style="font-size: x-large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="Total" style="font-size: x-large"/>
+                    <p></p>
+                    <p:outputLabel />
+                    <p:outputLabel />
+                    <p:outputLabel value="Recibidos: " style="font-size: large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="#{mbAcceso.cfdisTotal}" style="font-size: large">
 
-                <h:form id="jsfForm1">
-                    <h3>Get value from selectBooleanCheckbox field</h3>
-                    <h:selectBooleanCheckbox value="Remember Me" id="chkRememberMe" />
-                    <h:commandButton value="Show Checked" onclick="showCheckedValue()" />
+                    </p:outputLabel>
+                    <p:outputLabel value="Válidos: " style="font-size: large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="#{mbAcceso.cfdisValidos}" style="font-size: large" />
+                    <p:outputLabel value="Inválidos: " style="font-size: large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="#{mbAcceso.cfdisInvalidos}" style="font-size: large" />
+                    <p:outputLabel value="Duplicados: " style="font-size: large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="#{mbAcceso.cfdisDuplicados}" style="font-size: large" />
+                    <p:outputLabel value="Sin Válidar: " style="font-size: large"/>
+                    <p:outputLabel />
+                    <p:outputLabel value="#{mbAcceso.cfdisSinValidar}" style="font-size: large" />
+                </h:panelGrid>
+
+                <h:form enctype="multipart/form-data">
+                    <h:panelGrid columns="2">
+                        <p:panel header="Cambiar Logo de la Página" rendered="#{mbAcceso.administrarUsuarios}">
+                            <p:fileUpload value="#{mbServicios.file}" mode="simple" />
+                            <p:commandButton value="Submit" ajax="false" actionListener="#{mbServicios.actualizarLogo}" />
+                        </p:panel>
+                        <p:panel header="Cambiar icono de la Pestana" rendered="#{mbAcceso.administrarUsuarios}">
+                            <p:fileUpload value="#{mbServicios.icono}" mode="simple" />
+                            <p:commandButton value="Submit" ajax="false" actionListener="#{mbServicios.actualizarIcono}" />
+                        </p:panel>
+                    </h:panelGrid>
                 </h:form>
-
-                <script type="text/javascript">
-                    function showCheckedValue() {
-                        alert(document.getElementById('jsfForm1:chkRememberMe').checked);
-                    }
-                </script>
 
             </ui:define>
 
